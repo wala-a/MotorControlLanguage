@@ -1,0 +1,6 @@
+C:\Users\Walaa\Downloads\usb_echo\usb_echo\usb_echo.cydsn\usb_echo.cyprj|aebfc7d8-171e-4af0-b256-52918fbab4e3
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|591093d5-b419-42e8-a522-da73cd445d82
+C:\Users\Walaa\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|bf906ef8-8260-406c-9b34-cd7753dc4afc
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|d01b8885-64da-4d24-96f3-296d04ee87d2
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|737e8af3-343a-411b-b3f3-626ea0586aad
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|b971b883-1dd3-4e03-9869-ae825b57ae21

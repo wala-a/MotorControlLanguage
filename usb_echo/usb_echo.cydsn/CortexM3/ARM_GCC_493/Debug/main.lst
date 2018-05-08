@@ -1,0 +1,923 @@
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"main.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.main,"ax",%progbits
+  19              		.align	2
+  20              		.global	main
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	main, %function
+  24              	main:
+  25              	.LFB63:
+  26              		.file 1 ".\\main.c"
+   1:.\main.c      **** /* ========================================
+   2:.\main.c      ****  *
+   3:.\main.c      ****  * Copyright YOUR COMPANY, THE YEAR
+   4:.\main.c      ****  * All Rights Reserved
+   5:.\main.c      ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:.\main.c      ****  *
+   7:.\main.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:.\main.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:.\main.c      ****  *
+  10:.\main.c      ****  * ========================================
+  11:.\main.c      **** */
+  12:.\main.c      **** #include <project.h>
+  13:.\main.c      **** 
+  14:.\main.c      **** uint8 buffer[512], length;
+  15:.\main.c      **** 
+  16:.\main.c      **** int main()
+  17:.\main.c      **** {
+  27              		.loc 1 17 0
+  28              		.cfi_startproc
+  29              		@ Volatile: function does not return.
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  18:.\main.c      ****     CyGlobalIntEnable; /* Enable global interrupts. */
+  36              		.loc 1 18 0
+  37              	@ 18 ".\main.c" 1
+  38 0002 62B6     		CPSIE   i
+  39              	@ 0 "" 2
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 2
+
+
+  19:.\main.c      ****     USB_Start(0, USB_3V_OPERATION); // Start the USB peripheral
+  40              		.loc 1 19 0
+  41              		.thumb
+  42 0004 0020     		movs	r0, #0
+  43 0006 0146     		mov	r1, r0
+  44 0008 FFF7FEFF 		bl	USB_Start
+  45              	.LVL0:
+  46              	.L2:
+  20:.\main.c      ****     while(!USB_GetConfiguration()); // Wait until USB is configured
+  47              		.loc 1 20 0 discriminator 1
+  48 000c FFF7FEFF 		bl	USB_GetConfiguration
+  49              	.LVL1:
+  50 0010 0028     		cmp	r0, #0
+  51 0012 FBD0     		beq	.L2
+  21:.\main.c      ****     USB_EnableOutEP(2); // Enable our output endpoint (EP2);
+  52              		.loc 1 21 0
+  53 0014 0220     		movs	r0, #2
+  54 0016 FFF7FEFF 		bl	USB_EnableOutEP
+  55              	.LVL2:
+  56              	.L3:
+  22:.\main.c      ****     for(;;)
+  23:.\main.c      ****     {
+  24:.\main.c      ****         while(USB_GetEPState(2) == USB_OUT_BUFFER_EMPTY);
+  57              		.loc 1 24 0 discriminator 1
+  58 001a 0220     		movs	r0, #2
+  59 001c FFF7FEFF 		bl	USB_GetEPState
+  60              	.LVL3:
+  61 0020 0028     		cmp	r0, #0
+  62 0022 FAD0     		beq	.L3
+  25:.\main.c      ****         length = USB_GetEPCount(2);
+  63              		.loc 1 25 0
+  64 0024 0220     		movs	r0, #2
+  65 0026 FFF7FEFF 		bl	USB_GetEPCount
+  66              	.LVL4:
+  67 002a C2B2     		uxtb	r2, r0
+  68 002c 084B     		ldr	r3, .L7
+  69 002e 1A70     		strb	r2, [r3]
+  26:.\main.c      ****         USB_ReadOutEP(2, buffer, length);
+  70              		.loc 1 26 0
+  71 0030 0220     		movs	r0, #2
+  72 0032 0849     		ldr	r1, .L7+4
+  73 0034 FFF7FEFF 		bl	USB_ReadOutEP
+  74              	.LVL5:
+  75              	.L4:
+  27:.\main.c      ****         while(USB_GetEPState(1) != USB_IN_BUFFER_EMPTY);
+  76              		.loc 1 27 0 discriminator 1
+  77 0038 0120     		movs	r0, #1
+  78 003a FFF7FEFF 		bl	USB_GetEPState
+  79              	.LVL6:
+  80 003e 0128     		cmp	r0, #1
+  81 0040 FAD1     		bne	.L4
+  28:.\main.c      ****         USB_LoadInEP(1, buffer, length);
+  82              		.loc 1 28 0
+  83 0042 0449     		ldr	r1, .L7+4
+  84 0044 024B     		ldr	r3, .L7
+  85 0046 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  86 0048 FFF7FEFF 		bl	USB_LoadInEP
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 3
+
+
+  87              	.LVL7:
+  29:.\main.c      ****     }
+  88              		.loc 1 29 0
+  89 004c E5E7     		b	.L3
+  90              	.L8:
+  91 004e 00BF     		.align	2
+  92              	.L7:
+  93 0050 00000000 		.word	length
+  94 0054 00000000 		.word	buffer
+  95              		.cfi_endproc
+  96              	.LFE63:
+  97              		.size	main, .-main
+  98              		.comm	length,1,1
+  99              		.comm	buffer,512,4
+ 100              		.text
+ 101              	.Letext0:
+ 102              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.
+ 103              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.
+ 104              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 105              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 106              		.file 6 "Generated_Source\\PSoC5/USB.h"
+ 107              		.section	.debug_info,"",%progbits
+ 108              	.Ldebug_info0:
+ 109 0000 5A020000 		.4byte	0x25a
+ 110 0004 0400     		.2byte	0x4
+ 111 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 112 000a 04       		.byte	0x4
+ 113 000b 01       		.uleb128 0x1
+ 114 000c A8000000 		.4byte	.LASF26
+ 115 0010 01       		.byte	0x1
+ 116 0011 40000000 		.4byte	.LASF27
+ 117 0015 AD010000 		.4byte	.LASF28
+ 118 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 119 001d 00000000 		.4byte	0
+ 120 0021 00000000 		.4byte	.Ldebug_line0
+ 121 0025 02       		.uleb128 0x2
+ 122 0026 01       		.byte	0x1
+ 123 0027 06       		.byte	0x6
+ 124 0028 F8010000 		.4byte	.LASF0
+ 125 002c 02       		.uleb128 0x2
+ 126 002d 01       		.byte	0x1
+ 127 002e 08       		.byte	0x8
+ 128 002f 32000000 		.4byte	.LASF1
+ 129 0033 02       		.uleb128 0x2
+ 130 0034 02       		.byte	0x2
+ 131 0035 05       		.byte	0x5
+ 132 0036 9C010000 		.4byte	.LASF2
+ 133 003a 02       		.uleb128 0x2
+ 134 003b 02       		.byte	0x2
+ 135 003c 07       		.byte	0x7
+ 136 003d 5B000000 		.4byte	.LASF3
+ 137 0041 03       		.uleb128 0x3
+ 138 0042 1C000000 		.4byte	.LASF9
+ 139 0046 02       		.byte	0x2
+ 140 0047 3F       		.byte	0x3f
+ 141 0048 4C000000 		.4byte	0x4c
+ 142 004c 02       		.uleb128 0x2
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 4
+
+
+ 143 004d 04       		.byte	0x4
+ 144 004e 05       		.byte	0x5
+ 145 004f EA010000 		.4byte	.LASF4
+ 146 0053 02       		.uleb128 0x2
+ 147 0054 04       		.byte	0x4
+ 148 0055 07       		.byte	0x7
+ 149 0056 49000000 		.4byte	.LASF5
+ 150 005a 02       		.uleb128 0x2
+ 151 005b 08       		.byte	0x8
+ 152 005c 05       		.byte	0x5
+ 153 005d 79010000 		.4byte	.LASF6
+ 154 0061 02       		.uleb128 0x2
+ 155 0062 08       		.byte	0x8
+ 156 0063 07       		.byte	0x7
+ 157 0064 43010000 		.4byte	.LASF7
+ 158 0068 04       		.uleb128 0x4
+ 159 0069 04       		.byte	0x4
+ 160 006a 05       		.byte	0x5
+ 161 006b 696E7400 		.ascii	"int\000"
+ 162 006f 02       		.uleb128 0x2
+ 163 0070 04       		.byte	0x4
+ 164 0071 07       		.byte	0x7
+ 165 0072 36010000 		.4byte	.LASF8
+ 166 0076 03       		.uleb128 0x3
+ 167 0077 68010000 		.4byte	.LASF10
+ 168 007b 03       		.byte	0x3
+ 169 007c 2C       		.byte	0x2c
+ 170 007d 41000000 		.4byte	0x41
+ 171 0081 05       		.uleb128 0x5
+ 172 0082 2C000000 		.4byte	.LASF11
+ 173 0086 04       		.byte	0x4
+ 174 0087 3801     		.2byte	0x138
+ 175 0089 2C000000 		.4byte	0x2c
+ 176 008d 05       		.uleb128 0x5
+ 177 008e 97000000 		.4byte	.LASF12
+ 178 0092 04       		.byte	0x4
+ 179 0093 3901     		.2byte	0x139
+ 180 0095 3A000000 		.4byte	0x3a
+ 181 0099 02       		.uleb128 0x2
+ 182 009a 04       		.byte	0x4
+ 183 009b 04       		.byte	0x4
+ 184 009c 26000000 		.4byte	.LASF13
+ 185 00a0 02       		.uleb128 0x2
+ 186 00a1 08       		.byte	0x8
+ 187 00a2 04       		.byte	0x4
+ 188 00a3 8B000000 		.4byte	.LASF14
+ 189 00a7 02       		.uleb128 0x2
+ 190 00a8 01       		.byte	0x1
+ 191 00a9 08       		.byte	0x8
+ 192 00aa F3010000 		.4byte	.LASF15
+ 193 00ae 02       		.uleb128 0x2
+ 194 00af 04       		.byte	0x4
+ 195 00b0 07       		.byte	0x7
+ 196 00b1 70010000 		.4byte	.LASF16
+ 197 00b5 06       		.uleb128 0x6
+ 198 00b6 92000000 		.4byte	.LASF29
+ 199 00ba 01       		.byte	0x1
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 5
+
+
+ 200 00bb 10       		.byte	0x10
+ 201 00bc 68000000 		.4byte	0x68
+ 202 00c0 00000000 		.4byte	.LFB63
+ 203 00c4 58000000 		.4byte	.LFE63-.LFB63
+ 204 00c8 01       		.uleb128 0x1
+ 205 00c9 9C       		.byte	0x9c
+ 206 00ca 6B010000 		.4byte	0x16b
+ 207 00ce 07       		.uleb128 0x7
+ 208 00cf 0C000000 		.4byte	.LVL0
+ 209 00d3 AF010000 		.4byte	0x1af
+ 210 00d7 E6000000 		.4byte	0xe6
+ 211 00db 08       		.uleb128 0x8
+ 212 00dc 01       		.uleb128 0x1
+ 213 00dd 51       		.byte	0x51
+ 214 00de 01       		.uleb128 0x1
+ 215 00df 30       		.byte	0x30
+ 216 00e0 08       		.uleb128 0x8
+ 217 00e1 01       		.uleb128 0x1
+ 218 00e2 50       		.byte	0x50
+ 219 00e3 01       		.uleb128 0x1
+ 220 00e4 30       		.byte	0x30
+ 221 00e5 00       		.byte	0
+ 222 00e6 09       		.uleb128 0x9
+ 223 00e7 10000000 		.4byte	.LVL1
+ 224 00eb C6010000 		.4byte	0x1c6
+ 225 00ef 07       		.uleb128 0x7
+ 226 00f0 1A000000 		.4byte	.LVL2
+ 227 00f4 D2010000 		.4byte	0x1d2
+ 228 00f8 02010000 		.4byte	0x102
+ 229 00fc 08       		.uleb128 0x8
+ 230 00fd 01       		.uleb128 0x1
+ 231 00fe 50       		.byte	0x50
+ 232 00ff 01       		.uleb128 0x1
+ 233 0100 32       		.byte	0x32
+ 234 0101 00       		.byte	0
+ 235 0102 07       		.uleb128 0x7
+ 236 0103 20000000 		.4byte	.LVL3
+ 237 0107 E4010000 		.4byte	0x1e4
+ 238 010b 15010000 		.4byte	0x115
+ 239 010f 08       		.uleb128 0x8
+ 240 0110 01       		.uleb128 0x1
+ 241 0111 50       		.byte	0x50
+ 242 0112 01       		.uleb128 0x1
+ 243 0113 32       		.byte	0x32
+ 244 0114 00       		.byte	0
+ 245 0115 07       		.uleb128 0x7
+ 246 0116 2A000000 		.4byte	.LVL4
+ 247 011a FA010000 		.4byte	0x1fa
+ 248 011e 28010000 		.4byte	0x128
+ 249 0122 08       		.uleb128 0x8
+ 250 0123 01       		.uleb128 0x1
+ 251 0124 50       		.byte	0x50
+ 252 0125 01       		.uleb128 0x1
+ 253 0126 32       		.byte	0x32
+ 254 0127 00       		.byte	0
+ 255 0128 07       		.uleb128 0x7
+ 256 0129 38000000 		.4byte	.LVL5
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 6
+
+
+ 257 012d 10020000 		.4byte	0x210
+ 258 0131 44010000 		.4byte	0x144
+ 259 0135 08       		.uleb128 0x8
+ 260 0136 01       		.uleb128 0x1
+ 261 0137 51       		.byte	0x51
+ 262 0138 05       		.uleb128 0x5
+ 263 0139 03       		.byte	0x3
+ 264 013a 00000000 		.4byte	buffer
+ 265 013e 08       		.uleb128 0x8
+ 266 013f 01       		.uleb128 0x1
+ 267 0140 50       		.byte	0x50
+ 268 0141 01       		.uleb128 0x1
+ 269 0142 32       		.byte	0x32
+ 270 0143 00       		.byte	0
+ 271 0144 07       		.uleb128 0x7
+ 272 0145 3E000000 		.4byte	.LVL6
+ 273 0149 E4010000 		.4byte	0x1e4
+ 274 014d 57010000 		.4byte	0x157
+ 275 0151 08       		.uleb128 0x8
+ 276 0152 01       		.uleb128 0x1
+ 277 0153 50       		.byte	0x50
+ 278 0154 01       		.uleb128 0x1
+ 279 0155 31       		.byte	0x31
+ 280 0156 00       		.byte	0
+ 281 0157 0A       		.uleb128 0xa
+ 282 0158 4C000000 		.4byte	.LVL7
+ 283 015c 36020000 		.4byte	0x236
+ 284 0160 08       		.uleb128 0x8
+ 285 0161 01       		.uleb128 0x1
+ 286 0162 51       		.byte	0x51
+ 287 0163 05       		.uleb128 0x5
+ 288 0164 03       		.byte	0x3
+ 289 0165 00000000 		.4byte	buffer
+ 290 0169 00       		.byte	0
+ 291 016a 00       		.byte	0
+ 292 016b 0B       		.uleb128 0xb
+ 293 016c 7E000000 		.4byte	.LASF17
+ 294 0170 05       		.byte	0x5
+ 295 0171 5506     		.2byte	0x655
+ 296 0173 77010000 		.4byte	0x177
+ 297 0177 0C       		.uleb128 0xc
+ 298 0178 76000000 		.4byte	0x76
+ 299 017c 0D       		.uleb128 0xd
+ 300 017d 81000000 		.4byte	0x81
+ 301 0181 8D010000 		.4byte	0x18d
+ 302 0185 0E       		.uleb128 0xe
+ 303 0186 AE000000 		.4byte	0xae
+ 304 018a FF01     		.2byte	0x1ff
+ 305 018c 00       		.byte	0
+ 306 018d 0F       		.uleb128 0xf
+ 307 018e A6010000 		.4byte	.LASF18
+ 308 0192 01       		.byte	0x1
+ 309 0193 0E       		.byte	0xe
+ 310 0194 7C010000 		.4byte	0x17c
+ 311 0198 05       		.uleb128 0x5
+ 312 0199 03       		.byte	0x3
+ 313 019a 00000000 		.4byte	buffer
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 7
+
+
+ 314 019e 0F       		.uleb128 0xf
+ 315 019f 04020000 		.4byte	.LASF19
+ 316 01a3 01       		.byte	0x1
+ 317 01a4 0E       		.byte	0xe
+ 318 01a5 81000000 		.4byte	0x81
+ 319 01a9 05       		.uleb128 0x5
+ 320 01aa 03       		.byte	0x3
+ 321 01ab 00000000 		.4byte	length
+ 322 01af 10       		.uleb128 0x10
+ 323 01b0 9E000000 		.4byte	.LASF20
+ 324 01b4 06       		.byte	0x6
+ 325 01b5 2701     		.2byte	0x127
+ 326 01b7 C6010000 		.4byte	0x1c6
+ 327 01bb 11       		.uleb128 0x11
+ 328 01bc 81000000 		.4byte	0x81
+ 329 01c0 11       		.uleb128 0x11
+ 330 01c1 81000000 		.4byte	0x81
+ 331 01c5 00       		.byte	0
+ 332 01c6 12       		.uleb128 0x12
+ 333 01c7 87010000 		.4byte	.LASF30
+ 334 01cb 06       		.byte	0x6
+ 335 01cc 2A01     		.2byte	0x12a
+ 336 01ce 81000000 		.4byte	0x81
+ 337 01d2 10       		.uleb128 0x10
+ 338 01d3 6E000000 		.4byte	.LASF21
+ 339 01d7 06       		.byte	0x6
+ 340 01d8 3301     		.2byte	0x133
+ 341 01da E4010000 		.4byte	0x1e4
+ 342 01de 11       		.uleb128 0x11
+ 343 01df 81000000 		.4byte	0x81
+ 344 01e3 00       		.byte	0
+ 345 01e4 13       		.uleb128 0x13
+ 346 01e5 0D000000 		.4byte	.LASF22
+ 347 01e9 06       		.byte	0x6
+ 348 01ea 2D01     		.2byte	0x12d
+ 349 01ec 81000000 		.4byte	0x81
+ 350 01f0 FA010000 		.4byte	0x1fa
+ 351 01f4 11       		.uleb128 0x11
+ 352 01f5 81000000 		.4byte	0x81
+ 353 01f9 00       		.byte	0
+ 354 01fa 13       		.uleb128 0x13
+ 355 01fb 0B020000 		.4byte	.LASF23
+ 356 01ff 06       		.byte	0x6
+ 357 0200 2E01     		.2byte	0x12e
+ 358 0202 8D000000 		.4byte	0x8d
+ 359 0206 10020000 		.4byte	0x210
+ 360 020a 11       		.uleb128 0x11
+ 361 020b 81000000 		.4byte	0x81
+ 362 020f 00       		.byte	0
+ 363 0210 13       		.uleb128 0x13
+ 364 0211 5A010000 		.4byte	.LASF24
+ 365 0215 06       		.byte	0x6
+ 366 0216 3101     		.2byte	0x131
+ 367 0218 8D000000 		.4byte	0x8d
+ 368 021c 30020000 		.4byte	0x230
+ 369 0220 11       		.uleb128 0x11
+ 370 0221 81000000 		.4byte	0x81
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 8
+
+
+ 371 0225 11       		.uleb128 0x11
+ 372 0226 30020000 		.4byte	0x230
+ 373 022a 11       		.uleb128 0x11
+ 374 022b 8D000000 		.4byte	0x8d
+ 375 022f 00       		.byte	0
+ 376 0230 14       		.uleb128 0x14
+ 377 0231 04       		.byte	0x4
+ 378 0232 81000000 		.4byte	0x81
+ 379 0236 10       		.uleb128 0x10
+ 380 0237 00000000 		.4byte	.LASF25
+ 381 023b 06       		.byte	0x6
+ 382 023c 2F01     		.2byte	0x12f
+ 383 023e 52020000 		.4byte	0x252
+ 384 0242 11       		.uleb128 0x11
+ 385 0243 81000000 		.4byte	0x81
+ 386 0247 11       		.uleb128 0x11
+ 387 0248 52020000 		.4byte	0x252
+ 388 024c 11       		.uleb128 0x11
+ 389 024d 8D000000 		.4byte	0x8d
+ 390 0251 00       		.byte	0
+ 391 0252 14       		.uleb128 0x14
+ 392 0253 04       		.byte	0x4
+ 393 0254 58020000 		.4byte	0x258
+ 394 0258 15       		.uleb128 0x15
+ 395 0259 81000000 		.4byte	0x81
+ 396 025d 00       		.byte	0
+ 397              		.section	.debug_abbrev,"",%progbits
+ 398              	.Ldebug_abbrev0:
+ 399 0000 01       		.uleb128 0x1
+ 400 0001 11       		.uleb128 0x11
+ 401 0002 01       		.byte	0x1
+ 402 0003 25       		.uleb128 0x25
+ 403 0004 0E       		.uleb128 0xe
+ 404 0005 13       		.uleb128 0x13
+ 405 0006 0B       		.uleb128 0xb
+ 406 0007 03       		.uleb128 0x3
+ 407 0008 0E       		.uleb128 0xe
+ 408 0009 1B       		.uleb128 0x1b
+ 409 000a 0E       		.uleb128 0xe
+ 410 000b 55       		.uleb128 0x55
+ 411 000c 17       		.uleb128 0x17
+ 412 000d 11       		.uleb128 0x11
+ 413 000e 01       		.uleb128 0x1
+ 414 000f 10       		.uleb128 0x10
+ 415 0010 17       		.uleb128 0x17
+ 416 0011 00       		.byte	0
+ 417 0012 00       		.byte	0
+ 418 0013 02       		.uleb128 0x2
+ 419 0014 24       		.uleb128 0x24
+ 420 0015 00       		.byte	0
+ 421 0016 0B       		.uleb128 0xb
+ 422 0017 0B       		.uleb128 0xb
+ 423 0018 3E       		.uleb128 0x3e
+ 424 0019 0B       		.uleb128 0xb
+ 425 001a 03       		.uleb128 0x3
+ 426 001b 0E       		.uleb128 0xe
+ 427 001c 00       		.byte	0
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 9
+
+
+ 428 001d 00       		.byte	0
+ 429 001e 03       		.uleb128 0x3
+ 430 001f 16       		.uleb128 0x16
+ 431 0020 00       		.byte	0
+ 432 0021 03       		.uleb128 0x3
+ 433 0022 0E       		.uleb128 0xe
+ 434 0023 3A       		.uleb128 0x3a
+ 435 0024 0B       		.uleb128 0xb
+ 436 0025 3B       		.uleb128 0x3b
+ 437 0026 0B       		.uleb128 0xb
+ 438 0027 49       		.uleb128 0x49
+ 439 0028 13       		.uleb128 0x13
+ 440 0029 00       		.byte	0
+ 441 002a 00       		.byte	0
+ 442 002b 04       		.uleb128 0x4
+ 443 002c 24       		.uleb128 0x24
+ 444 002d 00       		.byte	0
+ 445 002e 0B       		.uleb128 0xb
+ 446 002f 0B       		.uleb128 0xb
+ 447 0030 3E       		.uleb128 0x3e
+ 448 0031 0B       		.uleb128 0xb
+ 449 0032 03       		.uleb128 0x3
+ 450 0033 08       		.uleb128 0x8
+ 451 0034 00       		.byte	0
+ 452 0035 00       		.byte	0
+ 453 0036 05       		.uleb128 0x5
+ 454 0037 16       		.uleb128 0x16
+ 455 0038 00       		.byte	0
+ 456 0039 03       		.uleb128 0x3
+ 457 003a 0E       		.uleb128 0xe
+ 458 003b 3A       		.uleb128 0x3a
+ 459 003c 0B       		.uleb128 0xb
+ 460 003d 3B       		.uleb128 0x3b
+ 461 003e 05       		.uleb128 0x5
+ 462 003f 49       		.uleb128 0x49
+ 463 0040 13       		.uleb128 0x13
+ 464 0041 00       		.byte	0
+ 465 0042 00       		.byte	0
+ 466 0043 06       		.uleb128 0x6
+ 467 0044 2E       		.uleb128 0x2e
+ 468 0045 01       		.byte	0x1
+ 469 0046 3F       		.uleb128 0x3f
+ 470 0047 19       		.uleb128 0x19
+ 471 0048 03       		.uleb128 0x3
+ 472 0049 0E       		.uleb128 0xe
+ 473 004a 3A       		.uleb128 0x3a
+ 474 004b 0B       		.uleb128 0xb
+ 475 004c 3B       		.uleb128 0x3b
+ 476 004d 0B       		.uleb128 0xb
+ 477 004e 49       		.uleb128 0x49
+ 478 004f 13       		.uleb128 0x13
+ 479 0050 11       		.uleb128 0x11
+ 480 0051 01       		.uleb128 0x1
+ 481 0052 12       		.uleb128 0x12
+ 482 0053 06       		.uleb128 0x6
+ 483 0054 40       		.uleb128 0x40
+ 484 0055 18       		.uleb128 0x18
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 10
+
+
+ 485 0056 9742     		.uleb128 0x2117
+ 486 0058 19       		.uleb128 0x19
+ 487 0059 01       		.uleb128 0x1
+ 488 005a 13       		.uleb128 0x13
+ 489 005b 00       		.byte	0
+ 490 005c 00       		.byte	0
+ 491 005d 07       		.uleb128 0x7
+ 492 005e 898201   		.uleb128 0x4109
+ 493 0061 01       		.byte	0x1
+ 494 0062 11       		.uleb128 0x11
+ 495 0063 01       		.uleb128 0x1
+ 496 0064 31       		.uleb128 0x31
+ 497 0065 13       		.uleb128 0x13
+ 498 0066 01       		.uleb128 0x1
+ 499 0067 13       		.uleb128 0x13
+ 500 0068 00       		.byte	0
+ 501 0069 00       		.byte	0
+ 502 006a 08       		.uleb128 0x8
+ 503 006b 8A8201   		.uleb128 0x410a
+ 504 006e 00       		.byte	0
+ 505 006f 02       		.uleb128 0x2
+ 506 0070 18       		.uleb128 0x18
+ 507 0071 9142     		.uleb128 0x2111
+ 508 0073 18       		.uleb128 0x18
+ 509 0074 00       		.byte	0
+ 510 0075 00       		.byte	0
+ 511 0076 09       		.uleb128 0x9
+ 512 0077 898201   		.uleb128 0x4109
+ 513 007a 00       		.byte	0
+ 514 007b 11       		.uleb128 0x11
+ 515 007c 01       		.uleb128 0x1
+ 516 007d 31       		.uleb128 0x31
+ 517 007e 13       		.uleb128 0x13
+ 518 007f 00       		.byte	0
+ 519 0080 00       		.byte	0
+ 520 0081 0A       		.uleb128 0xa
+ 521 0082 898201   		.uleb128 0x4109
+ 522 0085 01       		.byte	0x1
+ 523 0086 11       		.uleb128 0x11
+ 524 0087 01       		.uleb128 0x1
+ 525 0088 31       		.uleb128 0x31
+ 526 0089 13       		.uleb128 0x13
+ 527 008a 00       		.byte	0
+ 528 008b 00       		.byte	0
+ 529 008c 0B       		.uleb128 0xb
+ 530 008d 34       		.uleb128 0x34
+ 531 008e 00       		.byte	0
+ 532 008f 03       		.uleb128 0x3
+ 533 0090 0E       		.uleb128 0xe
+ 534 0091 3A       		.uleb128 0x3a
+ 535 0092 0B       		.uleb128 0xb
+ 536 0093 3B       		.uleb128 0x3b
+ 537 0094 05       		.uleb128 0x5
+ 538 0095 49       		.uleb128 0x49
+ 539 0096 13       		.uleb128 0x13
+ 540 0097 3F       		.uleb128 0x3f
+ 541 0098 19       		.uleb128 0x19
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 11
+
+
+ 542 0099 3C       		.uleb128 0x3c
+ 543 009a 19       		.uleb128 0x19
+ 544 009b 00       		.byte	0
+ 545 009c 00       		.byte	0
+ 546 009d 0C       		.uleb128 0xc
+ 547 009e 35       		.uleb128 0x35
+ 548 009f 00       		.byte	0
+ 549 00a0 49       		.uleb128 0x49
+ 550 00a1 13       		.uleb128 0x13
+ 551 00a2 00       		.byte	0
+ 552 00a3 00       		.byte	0
+ 553 00a4 0D       		.uleb128 0xd
+ 554 00a5 01       		.uleb128 0x1
+ 555 00a6 01       		.byte	0x1
+ 556 00a7 49       		.uleb128 0x49
+ 557 00a8 13       		.uleb128 0x13
+ 558 00a9 01       		.uleb128 0x1
+ 559 00aa 13       		.uleb128 0x13
+ 560 00ab 00       		.byte	0
+ 561 00ac 00       		.byte	0
+ 562 00ad 0E       		.uleb128 0xe
+ 563 00ae 21       		.uleb128 0x21
+ 564 00af 00       		.byte	0
+ 565 00b0 49       		.uleb128 0x49
+ 566 00b1 13       		.uleb128 0x13
+ 567 00b2 2F       		.uleb128 0x2f
+ 568 00b3 05       		.uleb128 0x5
+ 569 00b4 00       		.byte	0
+ 570 00b5 00       		.byte	0
+ 571 00b6 0F       		.uleb128 0xf
+ 572 00b7 34       		.uleb128 0x34
+ 573 00b8 00       		.byte	0
+ 574 00b9 03       		.uleb128 0x3
+ 575 00ba 0E       		.uleb128 0xe
+ 576 00bb 3A       		.uleb128 0x3a
+ 577 00bc 0B       		.uleb128 0xb
+ 578 00bd 3B       		.uleb128 0x3b
+ 579 00be 0B       		.uleb128 0xb
+ 580 00bf 49       		.uleb128 0x49
+ 581 00c0 13       		.uleb128 0x13
+ 582 00c1 3F       		.uleb128 0x3f
+ 583 00c2 19       		.uleb128 0x19
+ 584 00c3 02       		.uleb128 0x2
+ 585 00c4 18       		.uleb128 0x18
+ 586 00c5 00       		.byte	0
+ 587 00c6 00       		.byte	0
+ 588 00c7 10       		.uleb128 0x10
+ 589 00c8 2E       		.uleb128 0x2e
+ 590 00c9 01       		.byte	0x1
+ 591 00ca 3F       		.uleb128 0x3f
+ 592 00cb 19       		.uleb128 0x19
+ 593 00cc 03       		.uleb128 0x3
+ 594 00cd 0E       		.uleb128 0xe
+ 595 00ce 3A       		.uleb128 0x3a
+ 596 00cf 0B       		.uleb128 0xb
+ 597 00d0 3B       		.uleb128 0x3b
+ 598 00d1 05       		.uleb128 0x5
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 12
+
+
+ 599 00d2 27       		.uleb128 0x27
+ 600 00d3 19       		.uleb128 0x19
+ 601 00d4 3C       		.uleb128 0x3c
+ 602 00d5 19       		.uleb128 0x19
+ 603 00d6 01       		.uleb128 0x1
+ 604 00d7 13       		.uleb128 0x13
+ 605 00d8 00       		.byte	0
+ 606 00d9 00       		.byte	0
+ 607 00da 11       		.uleb128 0x11
+ 608 00db 05       		.uleb128 0x5
+ 609 00dc 00       		.byte	0
+ 610 00dd 49       		.uleb128 0x49
+ 611 00de 13       		.uleb128 0x13
+ 612 00df 00       		.byte	0
+ 613 00e0 00       		.byte	0
+ 614 00e1 12       		.uleb128 0x12
+ 615 00e2 2E       		.uleb128 0x2e
+ 616 00e3 00       		.byte	0
+ 617 00e4 3F       		.uleb128 0x3f
+ 618 00e5 19       		.uleb128 0x19
+ 619 00e6 03       		.uleb128 0x3
+ 620 00e7 0E       		.uleb128 0xe
+ 621 00e8 3A       		.uleb128 0x3a
+ 622 00e9 0B       		.uleb128 0xb
+ 623 00ea 3B       		.uleb128 0x3b
+ 624 00eb 05       		.uleb128 0x5
+ 625 00ec 27       		.uleb128 0x27
+ 626 00ed 19       		.uleb128 0x19
+ 627 00ee 49       		.uleb128 0x49
+ 628 00ef 13       		.uleb128 0x13
+ 629 00f0 3C       		.uleb128 0x3c
+ 630 00f1 19       		.uleb128 0x19
+ 631 00f2 00       		.byte	0
+ 632 00f3 00       		.byte	0
+ 633 00f4 13       		.uleb128 0x13
+ 634 00f5 2E       		.uleb128 0x2e
+ 635 00f6 01       		.byte	0x1
+ 636 00f7 3F       		.uleb128 0x3f
+ 637 00f8 19       		.uleb128 0x19
+ 638 00f9 03       		.uleb128 0x3
+ 639 00fa 0E       		.uleb128 0xe
+ 640 00fb 3A       		.uleb128 0x3a
+ 641 00fc 0B       		.uleb128 0xb
+ 642 00fd 3B       		.uleb128 0x3b
+ 643 00fe 05       		.uleb128 0x5
+ 644 00ff 27       		.uleb128 0x27
+ 645 0100 19       		.uleb128 0x19
+ 646 0101 49       		.uleb128 0x49
+ 647 0102 13       		.uleb128 0x13
+ 648 0103 3C       		.uleb128 0x3c
+ 649 0104 19       		.uleb128 0x19
+ 650 0105 01       		.uleb128 0x1
+ 651 0106 13       		.uleb128 0x13
+ 652 0107 00       		.byte	0
+ 653 0108 00       		.byte	0
+ 654 0109 14       		.uleb128 0x14
+ 655 010a 0F       		.uleb128 0xf
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 13
+
+
+ 656 010b 00       		.byte	0
+ 657 010c 0B       		.uleb128 0xb
+ 658 010d 0B       		.uleb128 0xb
+ 659 010e 49       		.uleb128 0x49
+ 660 010f 13       		.uleb128 0x13
+ 661 0110 00       		.byte	0
+ 662 0111 00       		.byte	0
+ 663 0112 15       		.uleb128 0x15
+ 664 0113 26       		.uleb128 0x26
+ 665 0114 00       		.byte	0
+ 666 0115 49       		.uleb128 0x49
+ 667 0116 13       		.uleb128 0x13
+ 668 0117 00       		.byte	0
+ 669 0118 00       		.byte	0
+ 670 0119 00       		.byte	0
+ 671              		.section	.debug_aranges,"",%progbits
+ 672 0000 1C000000 		.4byte	0x1c
+ 673 0004 0200     		.2byte	0x2
+ 674 0006 00000000 		.4byte	.Ldebug_info0
+ 675 000a 04       		.byte	0x4
+ 676 000b 00       		.byte	0
+ 677 000c 0000     		.2byte	0
+ 678 000e 0000     		.2byte	0
+ 679 0010 00000000 		.4byte	.LFB63
+ 680 0014 58000000 		.4byte	.LFE63-.LFB63
+ 681 0018 00000000 		.4byte	0
+ 682 001c 00000000 		.4byte	0
+ 683              		.section	.debug_ranges,"",%progbits
+ 684              	.Ldebug_ranges0:
+ 685 0000 00000000 		.4byte	.LFB63
+ 686 0004 58000000 		.4byte	.LFE63
+ 687 0008 00000000 		.4byte	0
+ 688 000c 00000000 		.4byte	0
+ 689              		.section	.debug_line,"",%progbits
+ 690              	.Ldebug_line0:
+ 691 0000 7D010000 		.section	.debug_str,"MS",%progbits,1
+ 691      02005201 
+ 691      00000201 
+ 691      FB0E0D00 
+ 691      01010101 
+ 692              	.LASF25:
+ 693 0000 5553425F 		.ascii	"USB_LoadInEP\000"
+ 693      4C6F6164 
+ 693      496E4550 
+ 693      00
+ 694              	.LASF22:
+ 695 000d 5553425F 		.ascii	"USB_GetEPState\000"
+ 695      47657445 
+ 695      50537461 
+ 695      746500
+ 696              	.LASF9:
+ 697 001c 5F5F696E 		.ascii	"__int32_t\000"
+ 697      7433325F 
+ 697      7400
+ 698              	.LASF13:
+ 699 0026 666C6F61 		.ascii	"float\000"
+ 699      7400
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 14
+
+
+ 700              	.LASF11:
+ 701 002c 75696E74 		.ascii	"uint8\000"
+ 701      3800
+ 702              	.LASF1:
+ 703 0032 756E7369 		.ascii	"unsigned char\000"
+ 703      676E6564 
+ 703      20636861 
+ 703      7200
+ 704              	.LASF27:
+ 705 0040 2E5C6D61 		.ascii	".\\main.c\000"
+ 705      696E2E63 
+ 705      00
+ 706              	.LASF5:
+ 707 0049 6C6F6E67 		.ascii	"long unsigned int\000"
+ 707      20756E73 
+ 707      69676E65 
+ 707      6420696E 
+ 707      7400
+ 708              	.LASF3:
+ 709 005b 73686F72 		.ascii	"short unsigned int\000"
+ 709      7420756E 
+ 709      7369676E 
+ 709      65642069 
+ 709      6E7400
+ 710              	.LASF21:
+ 711 006e 5553425F 		.ascii	"USB_EnableOutEP\000"
+ 711      456E6162 
+ 711      6C654F75 
+ 711      74455000 
+ 712              	.LASF17:
+ 713 007e 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 713      52784275 
+ 713      66666572 
+ 713      00
+ 714              	.LASF14:
+ 715 008b 646F7562 		.ascii	"double\000"
+ 715      6C6500
+ 716              	.LASF29:
+ 717 0092 6D61696E 		.ascii	"main\000"
+ 717      00
+ 718              	.LASF12:
+ 719 0097 75696E74 		.ascii	"uint16\000"
+ 719      313600
+ 720              	.LASF20:
+ 721 009e 5553425F 		.ascii	"USB_Start\000"
+ 721      53746172 
+ 721      7400
+ 722              	.LASF26:
+ 723 00a8 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 723      4320342E 
+ 723      392E3320 
+ 723      32303135 
+ 723      30333033 
+ 724 00db 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 724      20726576 
+ 724      6973696F 
+ 724      6E203232 
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 15
+
+
+ 724      31323230 
+ 725 010e 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 725      66756E63 
+ 725      74696F6E 
+ 725      2D736563 
+ 725      74696F6E 
+ 726              	.LASF8:
+ 727 0136 756E7369 		.ascii	"unsigned int\000"
+ 727      676E6564 
+ 727      20696E74 
+ 727      00
+ 728              	.LASF7:
+ 729 0143 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 729      206C6F6E 
+ 729      6720756E 
+ 729      7369676E 
+ 729      65642069 
+ 730              	.LASF24:
+ 731 015a 5553425F 		.ascii	"USB_ReadOutEP\000"
+ 731      52656164 
+ 731      4F757445 
+ 731      5000
+ 732              	.LASF10:
+ 733 0168 696E7433 		.ascii	"int32_t\000"
+ 733      325F7400 
+ 734              	.LASF16:
+ 735 0170 73697A65 		.ascii	"sizetype\000"
+ 735      74797065 
+ 735      00
+ 736              	.LASF6:
+ 737 0179 6C6F6E67 		.ascii	"long long int\000"
+ 737      206C6F6E 
+ 737      6720696E 
+ 737      7400
+ 738              	.LASF30:
+ 739 0187 5553425F 		.ascii	"USB_GetConfiguration\000"
+ 739      47657443 
+ 739      6F6E6669 
+ 739      67757261 
+ 739      74696F6E 
+ 740              	.LASF2:
+ 741 019c 73686F72 		.ascii	"short int\000"
+ 741      7420696E 
+ 741      7400
+ 742              	.LASF18:
+ 743 01a6 62756666 		.ascii	"buffer\000"
+ 743      657200
+ 744              	.LASF28:
+ 745 01ad 433A5C55 		.ascii	"C:\\Users\\Eric\\Documents\\PSoC Creator\\usb_echo\\"
+ 745      73657273 
+ 745      5C457269 
+ 745      635C446F 
+ 745      63756D65 
+ 746 01db 7573625F 		.ascii	"usb_echo.cydsn\000"
+ 746      6563686F 
+ 746      2E637964 
+ 746      736E00
+ARM GAS  C:\Users\Eric\AppData\Local\Temp\ccjXnidX.s 			page 16
+
+
+ 747              	.LASF4:
+ 748 01ea 6C6F6E67 		.ascii	"long int\000"
+ 748      20696E74 
+ 748      00
+ 749              	.LASF15:
+ 750 01f3 63686172 		.ascii	"char\000"
+ 750      00
+ 751              	.LASF0:
+ 752 01f8 7369676E 		.ascii	"signed char\000"
+ 752      65642063 
+ 752      68617200 
+ 753              	.LASF19:
+ 754 0204 6C656E67 		.ascii	"length\000"
+ 754      746800
+ 755              	.LASF23:
+ 756 020b 5553425F 		.ascii	"USB_GetEPCount\000"
+ 756      47657445 
+ 756      50436F75 
+ 756      6E7400
+ 757              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

@@ -1,0 +1,908 @@
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"USB_descr.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	USB_TABLE
+  20              		.global	USB_DEVICE0_TABLE
+  21              		.global	USB_DEVICE0_CONFIGURATION0_TABLE
+  22              		.global	USB_DEVICE0_CONFIGURATION0_INTERFACE_CLASS
+  23              		.global	USB_DEVICE0_CONFIGURATION0_EP_SETTINGS_TABLE
+  24              		.global	USB_STRING_DESCRIPTORS
+  25              		.global	USB_DEVICE0_CONFIGURATION0_DESCR
+  26              		.global	USB_DEVICE0_DESCR
+  27              		.section	.rodata
+  28              		.align	2
+  29              		.type	USB_TABLE, %object
+  30              		.size	USB_TABLE, 8
+  31              	USB_TABLE:
+  32 0000 01       		.byte	1
+  33 0001 000000   		.space	3
+  34 0004 00000000 		.word	USB_DEVICE0_TABLE
+  35              		.type	USB_DEVICE0_TABLE, %object
+  36              		.size	USB_DEVICE0_TABLE, 24
+  37              	USB_DEVICE0_TABLE:
+  38 0008 01       		.byte	1
+  39 0009 000000   		.space	3
+  40 000c 00000000 		.word	USB_DEVICE0_DESCR
+  41 0010 00       		.byte	0
+  42 0011 000000   		.space	3
+  43 0014 00000000 		.word	0
+  44 0018 01       		.byte	1
+  45 0019 000000   		.space	3
+  46 001c 00000000 		.word	USB_DEVICE0_CONFIGURATION0_TABLE
+  47              		.type	USB_DEVICE0_CONFIGURATION0_TABLE, %object
+  48              		.size	USB_DEVICE0_CONFIGURATION0_TABLE, 32
+  49              	USB_DEVICE0_CONFIGURATION0_TABLE:
+  50 0020 01       		.byte	1
+  51 0021 000000   		.space	3
+  52 0024 00000000 		.word	USB_DEVICE0_CONFIGURATION0_DESCR
+  53 0028 02       		.byte	2
+  54 0029 000000   		.space	3
+  55 002c 00000000 		.word	USB_DEVICE0_CONFIGURATION0_EP_SETTINGS_TABLE
+  56 0030 00       		.byte	0
+  57 0031 000000   		.space	3
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 2
+
+
+  58 0034 00000000 		.word	0
+  59 0038 00       		.byte	0
+  60 0039 000000   		.space	3
+  61 003c 00000000 		.word	USB_DEVICE0_CONFIGURATION0_INTERFACE_CLASS
+  62              		.type	USB_DEVICE0_CONFIGURATION0_INTERFACE_CLASS, %object
+  63              		.size	USB_DEVICE0_CONFIGURATION0_INTERFACE_CLASS, 1
+  64              	USB_DEVICE0_CONFIGURATION0_INTERFACE_CLASS:
+  65 0040 FF       		.byte	-1
+  66 0041 000000   		.space	3
+  67              		.type	USB_DEVICE0_CONFIGURATION0_EP_SETTINGS_TABLE, %object
+  68              		.size	USB_DEVICE0_CONFIGURATION0_EP_SETTINGS_TABLE, 16
+  69              	USB_DEVICE0_CONFIGURATION0_EP_SETTINGS_TABLE:
+  70 0044 00       		.byte	0
+  71 0045 00       		.byte	0
+  72 0046 81       		.byte	-127
+  73 0047 02       		.byte	2
+  74 0048 4000     		.short	64
+  75 004a FF       		.byte	-1
+  76 004b 00       		.space	1
+  77 004c 00       		.byte	0
+  78 004d 00       		.byte	0
+  79 004e 02       		.byte	2
+  80 004f 02       		.byte	2
+  81 0050 4000     		.short	64
+  82 0052 FF       		.byte	-1
+  83 0053 00       		.space	1
+  84              		.type	USB_STRING_DESCRIPTORS, %object
+  85              		.size	USB_STRING_DESCRIPTORS, 49
+  86              	USB_STRING_DESCRIPTORS:
+  87 0054 04       		.byte	4
+  88 0055 03       		.byte	3
+  89 0056 09       		.byte	9
+  90 0057 04       		.byte	4
+  91 0058 10       		.byte	16
+  92 0059 03       		.byte	3
+  93 005a 43       		.byte	67
+  94 005b 00       		.byte	0
+  95 005c 79       		.byte	121
+  96 005d 00       		.byte	0
+  97 005e 70       		.byte	112
+  98 005f 00       		.byte	0
+  99 0060 72       		.byte	114
+ 100 0061 00       		.byte	0
+ 101 0062 65       		.byte	101
+ 102 0063 00       		.byte	0
+ 103 0064 73       		.byte	115
+ 104 0065 00       		.byte	0
+ 105 0066 73       		.byte	115
+ 106 0067 00       		.byte	0
+ 107 0068 12       		.byte	18
+ 108 0069 03       		.byte	3
+ 109 006a 75       		.byte	117
+ 110 006b 00       		.byte	0
+ 111 006c 73       		.byte	115
+ 112 006d 00       		.byte	0
+ 113 006e 62       		.byte	98
+ 114 006f 00       		.byte	0
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 3
+
+
+ 115 0070 5F       		.byte	95
+ 116 0071 00       		.byte	0
+ 117 0072 65       		.byte	101
+ 118 0073 00       		.byte	0
+ 119 0074 63       		.byte	99
+ 120 0075 00       		.byte	0
+ 121 0076 68       		.byte	104
+ 122 0077 00       		.byte	0
+ 123 0078 6F       		.byte	111
+ 124 0079 00       		.byte	0
+ 125 007a 0A       		.byte	10
+ 126 007b 03       		.byte	3
+ 127 007c 6D       		.byte	109
+ 128 007d 00       		.byte	0
+ 129 007e 61       		.byte	97
+ 130 007f 00       		.byte	0
+ 131 0080 69       		.byte	105
+ 132 0081 00       		.byte	0
+ 133 0082 6E       		.byte	110
+ 134 0083 00       		.byte	0
+ 135 0084 00       		.byte	0
+ 136 0085 000000   		.space	3
+ 137              		.type	USB_DEVICE0_CONFIGURATION0_DESCR, %object
+ 138              		.size	USB_DEVICE0_CONFIGURATION0_DESCR, 32
+ 139              	USB_DEVICE0_CONFIGURATION0_DESCR:
+ 140 0088 09       		.byte	9
+ 141 0089 02       		.byte	2
+ 142 008a 20       		.byte	32
+ 143 008b 00       		.byte	0
+ 144 008c 01       		.byte	1
+ 145 008d 01       		.byte	1
+ 146 008e 03       		.byte	3
+ 147 008f 80       		.byte	-128
+ 148 0090 19       		.byte	25
+ 149 0091 09       		.byte	9
+ 150 0092 04       		.byte	4
+ 151 0093 00       		.byte	0
+ 152 0094 00       		.byte	0
+ 153 0095 02       		.byte	2
+ 154 0096 FF       		.byte	-1
+ 155 0097 00       		.byte	0
+ 156 0098 00       		.byte	0
+ 157 0099 03       		.byte	3
+ 158 009a 07       		.byte	7
+ 159 009b 05       		.byte	5
+ 160 009c 81       		.byte	-127
+ 161 009d 02       		.byte	2
+ 162 009e 40       		.byte	64
+ 163 009f 00       		.byte	0
+ 164 00a0 00       		.byte	0
+ 165 00a1 07       		.byte	7
+ 166 00a2 05       		.byte	5
+ 167 00a3 02       		.byte	2
+ 168 00a4 02       		.byte	2
+ 169 00a5 40       		.byte	64
+ 170 00a6 00       		.byte	0
+ 171 00a7 00       		.byte	0
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 4
+
+
+ 172              		.type	USB_DEVICE0_DESCR, %object
+ 173              		.size	USB_DEVICE0_DESCR, 18
+ 174              	USB_DEVICE0_DESCR:
+ 175 00a8 12       		.byte	18
+ 176 00a9 01       		.byte	1
+ 177 00aa 00       		.byte	0
+ 178 00ab 02       		.byte	2
+ 179 00ac FF       		.byte	-1
+ 180 00ad 00       		.byte	0
+ 181 00ae 00       		.byte	0
+ 182 00af 08       		.byte	8
+ 183 00b0 B4       		.byte	-76
+ 184 00b1 04       		.byte	4
+ 185 00b2 80       		.byte	-128
+ 186 00b3 00       		.byte	0
+ 187 00b4 00       		.byte	0
+ 188 00b5 00       		.byte	0
+ 189 00b6 01       		.byte	1
+ 190 00b7 02       		.byte	2
+ 191 00b8 00       		.byte	0
+ 192 00b9 01       		.byte	1
+ 193              		.text
+ 194              	.Letext0:
+ 195              		.file 1 "Generated_Source\\PSoC5\\cytypes.h"
+ 196              		.file 2 "Generated_Source\\PSoC5\\USB.h"
+ 197              		.file 3 "Generated_Source\\PSoC5\\USB_descr.c"
+ 198              		.section	.debug_info,"",%progbits
+ 199              	.Ldebug_info0:
+ 200 0000 67020000 		.4byte	0x267
+ 201 0004 0400     		.2byte	0x4
+ 202 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 203 000a 04       		.byte	0x4
+ 204 000b 01       		.uleb128 0x1
+ 205 000c 86000000 		.4byte	.LASF33
+ 206 0010 0C       		.byte	0xc
+ 207 0011 D4010000 		.4byte	.LASF34
+ 208 0015 80020000 		.4byte	.LASF35
+ 209 0019 00000000 		.4byte	.Ldebug_line0
+ 210 001d 02       		.uleb128 0x2
+ 211 001e 01       		.byte	0x1
+ 212 001f 06       		.byte	0x6
+ 213 0020 CF020000 		.4byte	.LASF0
+ 214 0024 02       		.uleb128 0x2
+ 215 0025 01       		.byte	0x1
+ 216 0026 08       		.byte	0x8
+ 217 0027 78000000 		.4byte	.LASF1
+ 218 002b 02       		.uleb128 0x2
+ 219 002c 02       		.byte	0x2
+ 220 002d 05       		.byte	0x5
+ 221 002e 66020000 		.4byte	.LASF2
+ 222 0032 02       		.uleb128 0x2
+ 223 0033 02       		.byte	0x2
+ 224 0034 07       		.byte	0x7
+ 225 0035 00000000 		.4byte	.LASF3
+ 226 0039 02       		.uleb128 0x2
+ 227 003a 04       		.byte	0x4
+ 228 003b 05       		.byte	0x5
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 5
+
+
+ 229 003c BA020000 		.4byte	.LASF4
+ 230 0040 02       		.uleb128 0x2
+ 231 0041 04       		.byte	0x4
+ 232 0042 07       		.byte	0x7
+ 233 0043 1F010000 		.4byte	.LASF5
+ 234 0047 02       		.uleb128 0x2
+ 235 0048 08       		.byte	0x8
+ 236 0049 05       		.byte	0x5
+ 237 004a 49020000 		.4byte	.LASF6
+ 238 004e 02       		.uleb128 0x2
+ 239 004f 08       		.byte	0x8
+ 240 0050 07       		.byte	0x7
+ 241 0051 F7010000 		.4byte	.LASF7
+ 242 0055 03       		.uleb128 0x3
+ 243 0056 04       		.byte	0x4
+ 244 0057 05       		.byte	0x5
+ 245 0058 696E7400 		.ascii	"int\000"
+ 246 005c 02       		.uleb128 0x2
+ 247 005d 04       		.byte	0x4
+ 248 005e 07       		.byte	0x7
+ 249 005f C7010000 		.4byte	.LASF8
+ 250 0063 04       		.uleb128 0x4
+ 251 0064 70020000 		.4byte	.LASF9
+ 252 0068 01       		.byte	0x1
+ 253 0069 E401     		.2byte	0x1e4
+ 254 006b 24000000 		.4byte	0x24
+ 255 006f 04       		.uleb128 0x4
+ 256 0070 C0010000 		.4byte	.LASF10
+ 257 0074 01       		.byte	0x1
+ 258 0075 E501     		.2byte	0x1e5
+ 259 0077 32000000 		.4byte	0x32
+ 260 007b 02       		.uleb128 0x2
+ 261 007c 04       		.byte	0x4
+ 262 007d 04       		.byte	0x4
+ 263 007e 46000000 		.4byte	.LASF11
+ 264 0082 02       		.uleb128 0x2
+ 265 0083 08       		.byte	0x8
+ 266 0084 04       		.byte	0x4
+ 267 0085 81010000 		.4byte	.LASF12
+ 268 0089 02       		.uleb128 0x2
+ 269 008a 01       		.byte	0x1
+ 270 008b 08       		.byte	0x8
+ 271 008c 57020000 		.4byte	.LASF13
+ 272 0090 02       		.uleb128 0x2
+ 273 0091 08       		.byte	0x8
+ 274 0092 04       		.byte	0x4
+ 275 0093 C3020000 		.4byte	.LASF14
+ 276 0097 02       		.uleb128 0x2
+ 277 0098 04       		.byte	0x4
+ 278 0099 07       		.byte	0x7
+ 279 009a 40020000 		.4byte	.LASF15
+ 280 009e 05       		.uleb128 0x5
+ 281 009f 08       		.byte	0x8
+ 282 00a0 02       		.byte	0x2
+ 283 00a1 97       		.byte	0x97
+ 284 00a2 EF000000 		.4byte	0xef
+ 285 00a6 06       		.uleb128 0x6
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 6
+
+
+ 286 00a7 76020000 		.4byte	.LASF16
+ 287 00ab 02       		.byte	0x2
+ 288 00ac 99       		.byte	0x99
+ 289 00ad 63000000 		.4byte	0x63
+ 290 00b1 00       		.byte	0
+ 291 00b2 06       		.uleb128 0x6
+ 292 00b3 4C000000 		.4byte	.LASF17
+ 293 00b7 02       		.byte	0x2
+ 294 00b8 9A       		.byte	0x9a
+ 295 00b9 63000000 		.4byte	0x63
+ 296 00bd 01       		.byte	0x1
+ 297 00be 06       		.uleb128 0x6
+ 298 00bf 31010000 		.4byte	.LASF18
+ 299 00c3 02       		.byte	0x2
+ 300 00c4 9B       		.byte	0x9b
+ 301 00c5 63000000 		.4byte	0x63
+ 302 00c9 02       		.byte	0x2
+ 303 00ca 06       		.uleb128 0x6
+ 304 00cb 14010000 		.4byte	.LASF19
+ 305 00cf 02       		.byte	0x2
+ 306 00d0 9C       		.byte	0x9c
+ 307 00d1 63000000 		.4byte	0x63
+ 308 00d5 03       		.byte	0x3
+ 309 00d6 06       		.uleb128 0x6
+ 310 00d7 88010000 		.4byte	.LASF20
+ 311 00db 02       		.byte	0x2
+ 312 00dc 9D       		.byte	0x9d
+ 313 00dd 6F000000 		.4byte	0x6f
+ 314 00e1 04       		.byte	0x4
+ 315 00e2 06       		.uleb128 0x6
+ 316 00e3 DB020000 		.4byte	.LASF21
+ 317 00e7 02       		.byte	0x2
+ 318 00e8 9E       		.byte	0x9e
+ 319 00e9 63000000 		.4byte	0x63
+ 320 00ed 06       		.byte	0x6
+ 321 00ee 00       		.byte	0
+ 322 00ef 07       		.uleb128 0x7
+ 323 00f0 36010000 		.4byte	.LASF22
+ 324 00f4 02       		.byte	0x2
+ 325 00f5 9F       		.byte	0x9f
+ 326 00f6 9E000000 		.4byte	0x9e
+ 327 00fa 05       		.uleb128 0x5
+ 328 00fb 08       		.byte	0x8
+ 329 00fc 02       		.byte	0x2
+ 330 00fd AE       		.byte	0xae
+ 331 00fe 19010000 		.4byte	0x119
+ 332 0102 08       		.uleb128 0x8
+ 333 0103 6300     		.ascii	"c\000"
+ 334 0105 02       		.byte	0x2
+ 335 0106 B0       		.byte	0xb0
+ 336 0107 63000000 		.4byte	0x63
+ 337 010b 00       		.byte	0
+ 338 010c 06       		.uleb128 0x6
+ 339 010d 0E020000 		.4byte	.LASF23
+ 340 0111 02       		.byte	0x2
+ 341 0112 B1       		.byte	0xb1
+ 342 0113 19010000 		.4byte	0x119
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 7
+
+
+ 343 0117 04       		.byte	0x4
+ 344 0118 00       		.byte	0
+ 345 0119 09       		.uleb128 0x9
+ 346 011a 04       		.byte	0x4
+ 347 011b 1F010000 		.4byte	0x11f
+ 348 011f 0A       		.uleb128 0xa
+ 349 0120 07       		.uleb128 0x7
+ 350 0121 6E000000 		.4byte	.LASF24
+ 351 0125 02       		.byte	0x2
+ 352 0126 B2       		.byte	0xb2
+ 353 0127 FA000000 		.4byte	0xfa
+ 354 012b 0B       		.uleb128 0xb
+ 355 012c 3B010000 		.4byte	0x13b
+ 356 0130 3B010000 		.4byte	0x13b
+ 357 0134 0C       		.uleb128 0xc
+ 358 0135 97000000 		.4byte	0x97
+ 359 0139 11       		.byte	0x11
+ 360 013a 00       		.byte	0
+ 361 013b 0D       		.uleb128 0xd
+ 362 013c 63000000 		.4byte	0x63
+ 363 0140 0E       		.uleb128 0xe
+ 364 0141 4E010000 		.4byte	.LASF25
+ 365 0145 03       		.byte	0x3
+ 366 0146 24       		.byte	0x24
+ 367 0147 51010000 		.4byte	0x151
+ 368 014b 05       		.uleb128 0x5
+ 369 014c 03       		.byte	0x3
+ 370 014d 00000000 		.4byte	USB_DEVICE0_DESCR
+ 371 0151 0D       		.uleb128 0xd
+ 372 0152 2B010000 		.4byte	0x12b
+ 373 0156 0B       		.uleb128 0xb
+ 374 0157 3B010000 		.4byte	0x13b
+ 375 015b 66010000 		.4byte	0x166
+ 376 015f 0C       		.uleb128 0xc
+ 377 0160 97000000 		.4byte	0x97
+ 378 0164 1F       		.byte	0x1f
+ 379 0165 00       		.byte	0
+ 380 0166 0E       		.uleb128 0xe
+ 381 0167 60010000 		.4byte	.LASF26
+ 382 016b 03       		.byte	0x3
+ 383 016c 37       		.byte	0x37
+ 384 016d 77010000 		.4byte	0x177
+ 385 0171 05       		.uleb128 0x5
+ 386 0172 03       		.byte	0x3
+ 387 0173 00000000 		.4byte	USB_DEVICE0_CONFIGURATION0_DESCR
+ 388 0177 0D       		.uleb128 0xd
+ 389 0178 56010000 		.4byte	0x156
+ 390 017c 0B       		.uleb128 0xb
+ 391 017d 8C010000 		.4byte	0x18c
+ 392 0181 8C010000 		.4byte	0x18c
+ 393 0185 0C       		.uleb128 0xc
+ 394 0186 97000000 		.4byte	0x97
+ 395 018a 01       		.byte	0x1
+ 396 018b 00       		.byte	0
+ 397 018c 0D       		.uleb128 0xd
+ 398 018d EF000000 		.4byte	0xef
+ 399 0191 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 8
+
+
+ 400 0192 93010000 		.4byte	.LASF27
+ 401 0196 03       		.byte	0x3
+ 402 0197 8C       		.byte	0x8c
+ 403 0198 A2010000 		.4byte	0x1a2
+ 404 019c 05       		.uleb128 0x5
+ 405 019d 03       		.byte	0x3
+ 406 019e 00000000 		.4byte	USB_DEVICE0_CONFIGURATION0_EP_SETTINGS_TABLE
+ 407 01a2 0D       		.uleb128 0xd
+ 408 01a3 7C010000 		.4byte	0x17c
+ 409 01a7 0B       		.uleb128 0xb
+ 410 01a8 3B010000 		.4byte	0x13b
+ 411 01ac B7010000 		.4byte	0x1b7
+ 412 01b0 0C       		.uleb128 0xc
+ 413 01b1 97000000 		.4byte	0x97
+ 414 01b5 00       		.byte	0
+ 415 01b6 00       		.byte	0
+ 416 01b7 0E       		.uleb128 0xe
+ 417 01b8 15020000 		.4byte	.LASF28
+ 418 01bc 03       		.byte	0x3
+ 419 01bd 91       		.byte	0x91
+ 420 01be C8010000 		.4byte	0x1c8
+ 421 01c2 05       		.uleb128 0x5
+ 422 01c3 03       		.byte	0x3
+ 423 01c4 00000000 		.4byte	USB_DEVICE0_CONFIGURATION0_INTERFACE_CLASS
+ 424 01c8 0D       		.uleb128 0xd
+ 425 01c9 A7010000 		.4byte	0x1a7
+ 426 01cd 0B       		.uleb128 0xb
+ 427 01ce DD010000 		.4byte	0x1dd
+ 428 01d2 DD010000 		.4byte	0x1dd
+ 429 01d6 0C       		.uleb128 0xc
+ 430 01d7 97000000 		.4byte	0x97
+ 431 01db 03       		.byte	0x3
+ 432 01dc 00       		.byte	0
+ 433 01dd 0D       		.uleb128 0xd
+ 434 01de 20010000 		.4byte	0x120
+ 435 01e2 0E       		.uleb128 0xe
+ 436 01e3 25000000 		.4byte	.LASF29
+ 437 01e7 03       		.byte	0x3
+ 438 01e8 99       		.byte	0x99
+ 439 01e9 F3010000 		.4byte	0x1f3
+ 440 01ed 05       		.uleb128 0x5
+ 441 01ee 03       		.byte	0x3
+ 442 01ef 00000000 		.4byte	USB_DEVICE0_CONFIGURATION0_TABLE
+ 443 01f3 0D       		.uleb128 0xd
+ 444 01f4 CD010000 		.4byte	0x1cd
+ 445 01f8 0B       		.uleb128 0xb
+ 446 01f9 DD010000 		.4byte	0x1dd
+ 447 01fd 08020000 		.4byte	0x208
+ 448 0201 0C       		.uleb128 0xc
+ 449 0202 97000000 		.4byte	0x97
+ 450 0206 02       		.byte	0x2
+ 451 0207 00       		.byte	0
+ 452 0208 0E       		.uleb128 0xe
+ 453 0209 13000000 		.4byte	.LASF30
+ 454 020d 03       		.byte	0x3
+ 455 020e A3       		.byte	0xa3
+ 456 020f 19020000 		.4byte	0x219
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 9
+
+
+ 457 0213 05       		.uleb128 0x5
+ 458 0214 03       		.byte	0x3
+ 459 0215 00000000 		.4byte	USB_DEVICE0_TABLE
+ 460 0219 0D       		.uleb128 0xd
+ 461 021a F8010000 		.4byte	0x1f8
+ 462 021e 0B       		.uleb128 0xb
+ 463 021f DD010000 		.4byte	0x1dd
+ 464 0223 2E020000 		.4byte	0x22e
+ 465 0227 0C       		.uleb128 0xc
+ 466 0228 97000000 		.4byte	0x97
+ 467 022c 00       		.byte	0
+ 468 022d 00       		.byte	0
+ 469 022e 0E       		.uleb128 0xe
+ 470 022f 5C020000 		.4byte	.LASF31
+ 471 0233 03       		.byte	0x3
+ 472 0234 AB       		.byte	0xab
+ 473 0235 3F020000 		.4byte	0x23f
+ 474 0239 05       		.uleb128 0x5
+ 475 023a 03       		.byte	0x3
+ 476 023b 00000000 		.4byte	USB_TABLE
+ 477 023f 0D       		.uleb128 0xd
+ 478 0240 1E020000 		.4byte	0x21e
+ 479 0244 0B       		.uleb128 0xb
+ 480 0245 3B010000 		.4byte	0x13b
+ 481 0249 54020000 		.4byte	0x254
+ 482 024d 0C       		.uleb128 0xc
+ 483 024e 97000000 		.4byte	0x97
+ 484 0252 30       		.byte	0x30
+ 485 0253 00       		.byte	0
+ 486 0254 0E       		.uleb128 0xe
+ 487 0255 57000000 		.4byte	.LASF32
+ 488 0259 03       		.byte	0x3
+ 489 025a 63       		.byte	0x63
+ 490 025b 65020000 		.4byte	0x265
+ 491 025f 05       		.uleb128 0x5
+ 492 0260 03       		.byte	0x3
+ 493 0261 00000000 		.4byte	USB_STRING_DESCRIPTORS
+ 494 0265 0D       		.uleb128 0xd
+ 495 0266 44020000 		.4byte	0x244
+ 496 026a 00       		.byte	0
+ 497              		.section	.debug_abbrev,"",%progbits
+ 498              	.Ldebug_abbrev0:
+ 499 0000 01       		.uleb128 0x1
+ 500 0001 11       		.uleb128 0x11
+ 501 0002 01       		.byte	0x1
+ 502 0003 25       		.uleb128 0x25
+ 503 0004 0E       		.uleb128 0xe
+ 504 0005 13       		.uleb128 0x13
+ 505 0006 0B       		.uleb128 0xb
+ 506 0007 03       		.uleb128 0x3
+ 507 0008 0E       		.uleb128 0xe
+ 508 0009 1B       		.uleb128 0x1b
+ 509 000a 0E       		.uleb128 0xe
+ 510 000b 10       		.uleb128 0x10
+ 511 000c 17       		.uleb128 0x17
+ 512 000d 00       		.byte	0
+ 513 000e 00       		.byte	0
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 10
+
+
+ 514 000f 02       		.uleb128 0x2
+ 515 0010 24       		.uleb128 0x24
+ 516 0011 00       		.byte	0
+ 517 0012 0B       		.uleb128 0xb
+ 518 0013 0B       		.uleb128 0xb
+ 519 0014 3E       		.uleb128 0x3e
+ 520 0015 0B       		.uleb128 0xb
+ 521 0016 03       		.uleb128 0x3
+ 522 0017 0E       		.uleb128 0xe
+ 523 0018 00       		.byte	0
+ 524 0019 00       		.byte	0
+ 525 001a 03       		.uleb128 0x3
+ 526 001b 24       		.uleb128 0x24
+ 527 001c 00       		.byte	0
+ 528 001d 0B       		.uleb128 0xb
+ 529 001e 0B       		.uleb128 0xb
+ 530 001f 3E       		.uleb128 0x3e
+ 531 0020 0B       		.uleb128 0xb
+ 532 0021 03       		.uleb128 0x3
+ 533 0022 08       		.uleb128 0x8
+ 534 0023 00       		.byte	0
+ 535 0024 00       		.byte	0
+ 536 0025 04       		.uleb128 0x4
+ 537 0026 16       		.uleb128 0x16
+ 538 0027 00       		.byte	0
+ 539 0028 03       		.uleb128 0x3
+ 540 0029 0E       		.uleb128 0xe
+ 541 002a 3A       		.uleb128 0x3a
+ 542 002b 0B       		.uleb128 0xb
+ 543 002c 3B       		.uleb128 0x3b
+ 544 002d 05       		.uleb128 0x5
+ 545 002e 49       		.uleb128 0x49
+ 546 002f 13       		.uleb128 0x13
+ 547 0030 00       		.byte	0
+ 548 0031 00       		.byte	0
+ 549 0032 05       		.uleb128 0x5
+ 550 0033 13       		.uleb128 0x13
+ 551 0034 01       		.byte	0x1
+ 552 0035 0B       		.uleb128 0xb
+ 553 0036 0B       		.uleb128 0xb
+ 554 0037 3A       		.uleb128 0x3a
+ 555 0038 0B       		.uleb128 0xb
+ 556 0039 3B       		.uleb128 0x3b
+ 557 003a 0B       		.uleb128 0xb
+ 558 003b 01       		.uleb128 0x1
+ 559 003c 13       		.uleb128 0x13
+ 560 003d 00       		.byte	0
+ 561 003e 00       		.byte	0
+ 562 003f 06       		.uleb128 0x6
+ 563 0040 0D       		.uleb128 0xd
+ 564 0041 00       		.byte	0
+ 565 0042 03       		.uleb128 0x3
+ 566 0043 0E       		.uleb128 0xe
+ 567 0044 3A       		.uleb128 0x3a
+ 568 0045 0B       		.uleb128 0xb
+ 569 0046 3B       		.uleb128 0x3b
+ 570 0047 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 11
+
+
+ 571 0048 49       		.uleb128 0x49
+ 572 0049 13       		.uleb128 0x13
+ 573 004a 38       		.uleb128 0x38
+ 574 004b 0B       		.uleb128 0xb
+ 575 004c 00       		.byte	0
+ 576 004d 00       		.byte	0
+ 577 004e 07       		.uleb128 0x7
+ 578 004f 16       		.uleb128 0x16
+ 579 0050 00       		.byte	0
+ 580 0051 03       		.uleb128 0x3
+ 581 0052 0E       		.uleb128 0xe
+ 582 0053 3A       		.uleb128 0x3a
+ 583 0054 0B       		.uleb128 0xb
+ 584 0055 3B       		.uleb128 0x3b
+ 585 0056 0B       		.uleb128 0xb
+ 586 0057 49       		.uleb128 0x49
+ 587 0058 13       		.uleb128 0x13
+ 588 0059 00       		.byte	0
+ 589 005a 00       		.byte	0
+ 590 005b 08       		.uleb128 0x8
+ 591 005c 0D       		.uleb128 0xd
+ 592 005d 00       		.byte	0
+ 593 005e 03       		.uleb128 0x3
+ 594 005f 08       		.uleb128 0x8
+ 595 0060 3A       		.uleb128 0x3a
+ 596 0061 0B       		.uleb128 0xb
+ 597 0062 3B       		.uleb128 0x3b
+ 598 0063 0B       		.uleb128 0xb
+ 599 0064 49       		.uleb128 0x49
+ 600 0065 13       		.uleb128 0x13
+ 601 0066 38       		.uleb128 0x38
+ 602 0067 0B       		.uleb128 0xb
+ 603 0068 00       		.byte	0
+ 604 0069 00       		.byte	0
+ 605 006a 09       		.uleb128 0x9
+ 606 006b 0F       		.uleb128 0xf
+ 607 006c 00       		.byte	0
+ 608 006d 0B       		.uleb128 0xb
+ 609 006e 0B       		.uleb128 0xb
+ 610 006f 49       		.uleb128 0x49
+ 611 0070 13       		.uleb128 0x13
+ 612 0071 00       		.byte	0
+ 613 0072 00       		.byte	0
+ 614 0073 0A       		.uleb128 0xa
+ 615 0074 26       		.uleb128 0x26
+ 616 0075 00       		.byte	0
+ 617 0076 00       		.byte	0
+ 618 0077 00       		.byte	0
+ 619 0078 0B       		.uleb128 0xb
+ 620 0079 01       		.uleb128 0x1
+ 621 007a 01       		.byte	0x1
+ 622 007b 49       		.uleb128 0x49
+ 623 007c 13       		.uleb128 0x13
+ 624 007d 01       		.uleb128 0x1
+ 625 007e 13       		.uleb128 0x13
+ 626 007f 00       		.byte	0
+ 627 0080 00       		.byte	0
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 12
+
+
+ 628 0081 0C       		.uleb128 0xc
+ 629 0082 21       		.uleb128 0x21
+ 630 0083 00       		.byte	0
+ 631 0084 49       		.uleb128 0x49
+ 632 0085 13       		.uleb128 0x13
+ 633 0086 2F       		.uleb128 0x2f
+ 634 0087 0B       		.uleb128 0xb
+ 635 0088 00       		.byte	0
+ 636 0089 00       		.byte	0
+ 637 008a 0D       		.uleb128 0xd
+ 638 008b 26       		.uleb128 0x26
+ 639 008c 00       		.byte	0
+ 640 008d 49       		.uleb128 0x49
+ 641 008e 13       		.uleb128 0x13
+ 642 008f 00       		.byte	0
+ 643 0090 00       		.byte	0
+ 644 0091 0E       		.uleb128 0xe
+ 645 0092 34       		.uleb128 0x34
+ 646 0093 00       		.byte	0
+ 647 0094 03       		.uleb128 0x3
+ 648 0095 0E       		.uleb128 0xe
+ 649 0096 3A       		.uleb128 0x3a
+ 650 0097 0B       		.uleb128 0xb
+ 651 0098 3B       		.uleb128 0x3b
+ 652 0099 0B       		.uleb128 0xb
+ 653 009a 49       		.uleb128 0x49
+ 654 009b 13       		.uleb128 0x13
+ 655 009c 3F       		.uleb128 0x3f
+ 656 009d 19       		.uleb128 0x19
+ 657 009e 02       		.uleb128 0x2
+ 658 009f 18       		.uleb128 0x18
+ 659 00a0 00       		.byte	0
+ 660 00a1 00       		.byte	0
+ 661 00a2 00       		.byte	0
+ 662              		.section	.debug_aranges,"",%progbits
+ 663 0000 14000000 		.4byte	0x14
+ 664 0004 0200     		.2byte	0x2
+ 665 0006 00000000 		.4byte	.Ldebug_info0
+ 666 000a 04       		.byte	0x4
+ 667 000b 00       		.byte	0
+ 668 000c 0000     		.2byte	0
+ 669 000e 0000     		.2byte	0
+ 670 0010 00000000 		.4byte	0
+ 671 0014 00000000 		.4byte	0
+ 672              		.section	.debug_line,"",%progbits
+ 673              	.Ldebug_line0:
+ 674 0000 55000000 		.section	.debug_str,"MS",%progbits,1
+ 674      02004F00 
+ 674      00000201 
+ 674      FB0E0D00 
+ 674      01010101 
+ 675              	.LASF3:
+ 676 0000 73686F72 		.ascii	"short unsigned int\000"
+ 676      7420756E 
+ 676      7369676E 
+ 676      65642069 
+ 676      6E7400
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 13
+
+
+ 677              	.LASF30:
+ 678 0013 5553425F 		.ascii	"USB_DEVICE0_TABLE\000"
+ 678      44455649 
+ 678      4345305F 
+ 678      5441424C 
+ 678      4500
+ 679              	.LASF29:
+ 680 0025 5553425F 		.ascii	"USB_DEVICE0_CONFIGURATION0_TABLE\000"
+ 680      44455649 
+ 680      4345305F 
+ 680      434F4E46 
+ 680      49475552 
+ 681              	.LASF11:
+ 682 0046 666C6F61 		.ascii	"float\000"
+ 682      7400
+ 683              	.LASF17:
+ 684 004c 616C7453 		.ascii	"altSetting\000"
+ 684      65747469 
+ 684      6E6700
+ 685              	.LASF32:
+ 686 0057 5553425F 		.ascii	"USB_STRING_DESCRIPTORS\000"
+ 686      53545249 
+ 686      4E475F44 
+ 686      45534352 
+ 686      4950544F 
+ 687              	.LASF24:
+ 688 006e 545F5553 		.ascii	"T_USB_LUT\000"
+ 688      425F4C55 
+ 688      5400
+ 689              	.LASF1:
+ 690 0078 756E7369 		.ascii	"unsigned char\000"
+ 690      676E6564 
+ 690      20636861 
+ 690      7200
+ 691              	.LASF33:
+ 692 0086 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 692      43313120 
+ 692      352E342E 
+ 692      31203230 
+ 692      31363036 
+ 693 00b9 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 693      20726576 
+ 693      6973696F 
+ 693      6E203233 
+ 693      37373135 
+ 694 00ec 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 694      66756E63 
+ 694      74696F6E 
+ 694      2D736563 
+ 694      74696F6E 
+ 695              	.LASF19:
+ 696 0114 61747472 		.ascii	"attributes\000"
+ 696      69627574 
+ 696      657300
+ 697              	.LASF5:
+ 698 011f 6C6F6E67 		.ascii	"long unsigned int\000"
+ 698      20756E73 
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 14
+
+
+ 698      69676E65 
+ 698      6420696E 
+ 698      7400
+ 699              	.LASF18:
+ 700 0131 61646472 		.ascii	"addr\000"
+ 700      00
+ 701              	.LASF22:
+ 702 0136 545F5553 		.ascii	"T_USB_EP_SETTINGS_BLOCK\000"
+ 702      425F4550 
+ 702      5F534554 
+ 702      54494E47 
+ 702      535F424C 
+ 703              	.LASF25:
+ 704 014e 5553425F 		.ascii	"USB_DEVICE0_DESCR\000"
+ 704      44455649 
+ 704      4345305F 
+ 704      44455343 
+ 704      5200
+ 705              	.LASF26:
+ 706 0160 5553425F 		.ascii	"USB_DEVICE0_CONFIGURATION0_DESCR\000"
+ 706      44455649 
+ 706      4345305F 
+ 706      434F4E46 
+ 706      49475552 
+ 707              	.LASF12:
+ 708 0181 646F7562 		.ascii	"double\000"
+ 708      6C6500
+ 709              	.LASF20:
+ 710 0188 62756666 		.ascii	"bufferSize\000"
+ 710      65725369 
+ 710      7A6500
+ 711              	.LASF27:
+ 712 0193 5553425F 		.ascii	"USB_DEVICE0_CONFIGURATION0_EP_SETTINGS_TABLE\000"
+ 712      44455649 
+ 712      4345305F 
+ 712      434F4E46 
+ 712      49475552 
+ 713              	.LASF10:
+ 714 01c0 75696E74 		.ascii	"uint16\000"
+ 714      313600
+ 715              	.LASF8:
+ 716 01c7 756E7369 		.ascii	"unsigned int\000"
+ 716      676E6564 
+ 716      20696E74 
+ 716      00
+ 717              	.LASF34:
+ 718 01d4 47656E65 		.ascii	"Generated_Source\\PSoC5\\USB_descr.c\000"
+ 718      72617465 
+ 718      645F536F 
+ 718      75726365 
+ 718      5C50536F 
+ 719              	.LASF7:
+ 720 01f7 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 720      206C6F6E 
+ 720      6720756E 
+ 720      7369676E 
+ 720      65642069 
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 15
+
+
+ 721              	.LASF23:
+ 722 020e 705F6C69 		.ascii	"p_list\000"
+ 722      737400
+ 723              	.LASF28:
+ 724 0215 5553425F 		.ascii	"USB_DEVICE0_CONFIGURATION0_INTERFACE_CLASS\000"
+ 724      44455649 
+ 724      4345305F 
+ 724      434F4E46 
+ 724      49475552 
+ 725              	.LASF15:
+ 726 0240 73697A65 		.ascii	"sizetype\000"
+ 726      74797065 
+ 726      00
+ 727              	.LASF6:
+ 728 0249 6C6F6E67 		.ascii	"long long int\000"
+ 728      206C6F6E 
+ 728      6720696E 
+ 728      7400
+ 729              	.LASF13:
+ 730 0257 63686172 		.ascii	"char\000"
+ 730      00
+ 731              	.LASF31:
+ 732 025c 5553425F 		.ascii	"USB_TABLE\000"
+ 732      5441424C 
+ 732      4500
+ 733              	.LASF2:
+ 734 0266 73686F72 		.ascii	"short int\000"
+ 734      7420696E 
+ 734      7400
+ 735              	.LASF9:
+ 736 0270 75696E74 		.ascii	"uint8\000"
+ 736      3800
+ 737              	.LASF16:
+ 738 0276 696E7465 		.ascii	"interface\000"
+ 738      72666163 
+ 738      6500
+ 739              	.LASF35:
+ 740 0280 433A5C55 		.ascii	"C:\\Users\\Walaa\\Downloads\\usb_echo\\usb_echo\\us"
+ 740      73657273 
+ 740      5C57616C 
+ 740      61615C44 
+ 740      6F776E6C 
+ 741 02ad 625F6563 		.ascii	"b_echo.cydsn\000"
+ 741      686F2E63 
+ 741      7964736E 
+ 741      00
+ 742              	.LASF4:
+ 743 02ba 6C6F6E67 		.ascii	"long int\000"
+ 743      20696E74 
+ 743      00
+ 744              	.LASF14:
+ 745 02c3 6C6F6E67 		.ascii	"long double\000"
+ 745      20646F75 
+ 745      626C6500 
+ 746              	.LASF0:
+ 747 02cf 7369676E 		.ascii	"signed char\000"
+ 747      65642063 
+ARM GAS  C:\Users\Walaa\AppData\Local\Temp\ccku00p6.s 			page 16
+
+
+ 747      68617200 
+ 748              	.LASF21:
+ 749 02db 624D6973 		.ascii	"bMisc\000"
+ 749      6300
+ 750              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,4 +1,4 @@
---------------- Build Started: 05/08/2018 14:30:09 Project: usb_echo, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Build Started: 05/09/2018 11:24:45 Project: usb_echo, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 The code generation step is up to date.
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/main.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og -c main.c -o .\CortexM3\ARM_GCC_541\Debug\main.o
 main.c: In function 'RX_INT':
@@ -103,25 +103,14 @@ c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.
  char  *_EXFUN(strtok,(char *__restrict, const char *__restrict));
         ^
 main.c:117:21: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
-                     sprintf(line, "Parse Error: UNKNOWN COMMAND: word: %s", word);
+                     sprintf(line, "Parse Error: UNKNOWN COMMAND");
                      ^
 main.c:117:21: warning: incompatible implicit declaration of built-in function 'sprintf'
 main.c:117:21: note: include '<stdio.h>' or provide a declaration of 'sprintf'
 main.c:117:29: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
-                     sprintf(line, "Parse Error: UNKNOWN COMMAND: word: %s", word);
+                     sprintf(line, "Parse Error: UNKNOWN COMMAND");
                              ^
 main.c:117:29: note: expected 'char *' but argument is of type 'uint8 * {aka unsigned char *}'
-main.c:118:37: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
-                     length = strlen(line);
-                                     ^
-In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
-                 from Generated_Source\PSoC5/CyLib.h:22,
-                 from Generated_Source\PSoC5/USB.h:22,
-                 from Generated_Source\PSoC5/project.h:22,
-                 from main.c:12:
-c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:33:9: note: expected 'const char *' but argument is of type 'uint8 * {aka unsigned char *}'
- size_t  _EXFUN(strlen,(const char *));
-         ^
 main.c:133:28: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
                      strcpy(line, "Parse Error: INVALID ARGUMENT");
                             ^
@@ -133,17 +122,6 @@ In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creat
 c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
  char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
         ^
-main.c:134:37: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
-                     length = strlen(line);
-                                     ^
-In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
-                 from Generated_Source\PSoC5/CyLib.h:22,
-                 from Generated_Source\PSoC5/USB.h:22,
-                 from Generated_Source\PSoC5/project.h:22,
-                 from main.c:12:
-c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:33:9: note: expected 'const char *' but argument is of type 'uint8 * {aka unsigned char *}'
- size_t  _EXFUN(strlen,(const char *));
-         ^
 main.c:150:28: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
                      strcpy(line, "Parse Error: UNKNOWN KEYWORD");
                             ^
@@ -155,17 +133,6 @@ In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creat
 c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
  char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
         ^
-main.c:151:37: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
-                     length = strlen(line);
-                                     ^
-In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
-                 from Generated_Source\PSoC5/CyLib.h:22,
-                 from Generated_Source\PSoC5/USB.h:22,
-                 from Generated_Source\PSoC5/project.h:22,
-                 from main.c:12:
-c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:33:9: note: expected 'const char *' but argument is of type 'uint8 * {aka unsigned char *}'
- size_t  _EXFUN(strlen,(const char *));
-         ^
 main.c:171:28: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
                      strcpy(line, "Parse Error: INVALID VALUE");
                             ^
@@ -177,17 +144,6 @@ In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creat
 c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
  char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
         ^
-main.c:172:37: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
-                     length = strlen(line);
-                                     ^
-In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
-                 from Generated_Source\PSoC5/CyLib.h:22,
-                 from Generated_Source\PSoC5/USB.h:22,
-                 from Generated_Source\PSoC5/project.h:22,
-                 from main.c:12:
-c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:33:9: note: expected 'const char *' but argument is of type 'uint8 * {aka unsigned char *}'
- size_t  _EXFUN(strlen,(const char *));
-         ^
 main.c:207:24: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
                  strcpy(line, "Success! Data being sent right over.");
                         ^
@@ -199,17 +155,6 @@ In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creat
 c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
  char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
         ^
-main.c:208:33: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
-                 length = strlen(line);
-                                 ^
-In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
-                 from Generated_Source\PSoC5/CyLib.h:22,
-                 from Generated_Source\PSoC5/USB.h:22,
-                 from Generated_Source\PSoC5/project.h:22,
-                 from main.c:12:
-c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:33:9: note: expected 'const char *' but argument is of type 'uint8 * {aka unsigned char *}'
- size_t  _EXFUN(strlen,(const char *));
-         ^
 main.c:234:24: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
                  strcpy(line, "Success! This command was evaluated in the PSoC.");
                         ^
@@ -221,6 +166,17 @@ In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creat
 c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
  char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
         ^
+main.c:237:25: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+         length = strlen(line);
+                         ^
+In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
+                 from Generated_Source\PSoC5/CyLib.h:22,
+                 from Generated_Source\PSoC5/USB.h:22,
+                 from Generated_Source\PSoC5/project.h:22,
+                 from main.c:12:
+c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:33:9: note: expected 'const char *' but argument is of type 'uint8 * {aka unsigned char *}'
+ size_t  _EXFUN(strlen,(const char *));
+         ^
 arm-none-eabi-ar.exe -rs .\CortexM3\ARM_GCC_541\Debug\usb_echo.a .\CortexM3\ARM_GCC_541\Debug\USB.o .\CortexM3\ARM_GCC_541\Debug\USB_audio.o .\CortexM3\ARM_GCC_541\Debug\USB_boot.o .\CortexM3\ARM_GCC_541\Debug\USB_cdc.o .\CortexM3\ARM_GCC_541\Debug\USB_cls.o .\CortexM3\ARM_GCC_541\Debug\USB_descr.o .\CortexM3\ARM_GCC_541\Debug\USB_drv.o .\CortexM3\ARM_GCC_541\Debug\USB_episr.o .\CortexM3\ARM_GCC_541\Debug\USB_hid.o .\CortexM3\ARM_GCC_541\Debug\USB_pm.o .\CortexM3\ARM_GCC_541\Debug\USB_std.o .\CortexM3\ARM_GCC_541\Debug\USB_vnd.o .\CortexM3\ARM_GCC_541\Debug\USB_midi.o .\CortexM3\ARM_GCC_541\Debug\USB_msc.o .\CortexM3\ARM_GCC_541\Debug\USB_Dm.o .\CortexM3\ARM_GCC_541\Debug\USB_Dp.o .\CortexM3\ARM_GCC_541\Debug\CyDmac.o .\CortexM3\ARM_GCC_541\Debug\CyFlash.o .\CortexM3\ARM_GCC_541\Debug\CyLib.o .\CortexM3\ARM_GCC_541\Debug\cyPm.o .\CortexM3\ARM_GCC_541\Debug\CySpc.o .\CortexM3\ARM_GCC_541\Debug\cyutils.o .\CortexM3\ARM_GCC_541\Debug\cy_em_eeprom.o .\CortexM3\ARM_GCC_541\Debug\Pin_1.o .\CortexM3\ARM_GCC_541\Debug\Pin_2.o .\CortexM3\ARM_GCC_541\Debug\Pin_3.o .\CortexM3\ARM_GCC_541\Debug\Pin_4.o .\CortexM3\ARM_GCC_541\Debug\Pin_5.o .\CortexM3\ARM_GCC_541\Debug\Pin_6.o .\CortexM3\ARM_GCC_541\Debug\Pin_7.o .\CortexM3\ARM_GCC_541\Debug\Pin_8.o .\CortexM3\ARM_GCC_541\Debug\Pin_9.o .\CortexM3\ARM_GCC_541\Debug\LCD.o .\CortexM3\ARM_GCC_541\Debug\LCD_PM.o .\CortexM3\ARM_GCC_541\Debug\UART.o .\CortexM3\ARM_GCC_541\Debug\UART_PM.o .\CortexM3\ARM_GCC_541\Debug\UART_INT.o .\CortexM3\ARM_GCC_541\Debug\UART_BOOT.o .\CortexM3\ARM_GCC_541\Debug\rx_int.o .\CortexM3\ARM_GCC_541\Debug\TX.o .\CortexM3\ARM_GCC_541\Debug\tx_int.o .\CortexM3\ARM_GCC_541\Debug\LCD_LCDPort.o .\CortexM3\ARM_GCC_541\Debug\UART_IntClock.o .\CortexM3\ARM_GCC_541\Debug\CyBootAsmGnu.o
 arm-none-eabi-ar.exe: creating .\CortexM3\ARM_GCC_541\Debug\usb_echo.a
 arm-none-eabi-gcc.exe -Wl,--start-group -o C:\Users\Walaa\Downloads\usb_echo\usb_echo\usb_echo.cydsn\CortexM3\ARM_GCC_541\Debug\usb_echo.elf .\CortexM3\ARM_GCC_541\Debug\main.o .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o .\CortexM3\ARM_GCC_541\Debug\cymetadata.o .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o .\CortexM3\ARM_GCC_541\Debug\usb_echo.a "C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_541\Debug\CyComponentLibrary.a" -mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 -Wl,-Map,.\CortexM3\ARM_GCC_541\Debug/usb_echo.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Og -ffat-lto-objects -Wl,--end-group
@@ -229,6 +185,6 @@ No ELF section .cychecksum found, creating one
 Application checksum calculated and stored in ELF section .cychecksum
 Checksum calculated and stored in ELF section .cymeta
 cyelftool.exe -S C:\Users\Walaa\Downloads\usb_echo\usb_echo\usb_echo.cydsn\CortexM3\ARM_GCC_541\Debug\usb_echo.elf
-Flash used: 11766 of 262144 bytes (4.5 %).
+Flash used: 9776 of 262144 bytes (3.7 %).
 SRAM used: 8385 of 65536 bytes (12.8 %). Stack: 2048 bytes. Heap: 128 bytes.
---------------- Build Succeeded: 05/08/2018 14:30:10 ---------------
+--------------- Build Succeeded: 05/09/2018 11:24:48 ---------------

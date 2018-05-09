@@ -114,8 +114,8 @@ int main()
                 else{
                     state = COMMAND;
                     //strcpy(line, "Parse Error: UNKNOWN COMMAND");
-                    sprintf(line, "Parse Error: UNKNOWN COMMAND: word: %s", word);
-                    length = strlen(line);
+                    sprintf(line, "Parse Error: UNKNOWN COMMAND");
+                    //length = strlen(line);
                     parsing = 0;
                 }
                 break;
@@ -131,7 +131,7 @@ int main()
                 else {
                     state = COMMAND;
                     strcpy(line, "Parse Error: INVALID ARGUMENT");
-                    length = strlen(line);
+                    //length = strlen(line);
                     parsing = 0;
                 }
                 break;}
@@ -148,7 +148,7 @@ int main()
                     state = COMMAND;
                     //sprintf(line, "Parse Error: UNKNOWN KEYWORD: %s", word);
                     strcpy(line, "Parse Error: UNKNOWN KEYWORD");
-                    length = strlen(line);
+                    //length = strlen(line);
                     parsing = 0;
                 }
                 break;}
@@ -169,7 +169,7 @@ int main()
                     /*THINGS ARE ENDING UP HERE WHEN THEY ARE VALID AND SHOULD BE FINE*/
                     state = COMMAND;
                     strcpy(line, "Parse Error: INVALID VALUE");
-                    length = strlen(line);
+                    //length = strlen(line);
                     parsing = 0;
                 }
                 break;}
@@ -205,7 +205,7 @@ int main()
                 }
 
                 strcpy(line, "Success! Data being sent right over.");
-                length = strlen(line);
+                //length = strlen(line);
                 //Communicate this command byte to the R31JP
                 UART_PutChar(val_byte_out);
                 UART_PutChar(inst_byte_out);
@@ -234,6 +234,7 @@ int main()
                 strcpy(line, "Success! This command was evaluated in the PSoC.");
                 break;}
             }
+        length = strlen(line);
         USB_LoadInEP(1, line, length);                    // Echo the data back into the buffer
     
     }

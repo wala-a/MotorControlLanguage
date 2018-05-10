@@ -49,16 +49,21 @@ const char *byte_to_binary(int x)
 
 //serial receive ISR
 CY_ISR(RX_INT){
-    uint8 RxData = UART_ReadRxData();
+    int RxData = UART_ReadRxData();
     /*debug*/ for (int i=0;i<strlen(byte_to_binary(RxData));i++){LCD_PutChar(byte_to_binary(RxData)[i]);}
     //if we hear back from the R31JP, that means there is an error
     //here, I am decoding the error code
     uint8 errorMsg[512];
     switch((int)RxData){
-    case 0: strcpy(errorMsg, "POSITION CONTROL UNAVAILABLE: the device you are using is not compatible with position control");
-    case 1: strcpy(errorMsg, "SPEED CONTROL UNAVAILABLE: the device you are using is not compatible with speed control");
-    case 2: strcpy(errorMsg, "NO SUCH MOTOR ERROR: the motor you attempted to move does not exist");
+    case 0b10: strcpy(errorMsg, "POSITION CONTROL UNAVAILABLE\n\r");
+        break;
+    case 0b11: strcpy(errorMsg, "SPEED CONTROL UNAVAILABLE\n\r");
+        break;
+    case 0b01: strcpy(errorMsg, "NO SUCH MOTOR ERROR\n\r");
+        break;
+    case 0b00: sprintf(errorMsg, "Success! data was delivered to the R31JP, %d", RxData);
     }
+    //if (RxData == 0b010) strcpy(errorMsg, "received TWO!");
     uint16 errLength = strlen(errorMsg);
     USB_LoadInEP(1, errorMsg, errLength); 
 }
@@ -99,11 +104,12 @@ int main()
         } else {
             strcpy(buffer, lines[current_line_num]);
         }
-        //*debug*/ for (int i=0;i<length;i++){LCD_PutChar(buffer[i]);}
+        LCD_ClearDisplay();
+        //*debug*/ for (int i=0;i<length-2;i++){LCD_PutChar(buffer[i]);}
         uint8 line[512] = "";
         //strcpy(line, buffer);
         char* word;
-        word = strtok(buffer, " ");
+        word = strtok(buffer, " \n\r");
         while (word != NULL && parsing){
             switch(state){
             case COMMAND:
@@ -115,13 +121,14 @@ int main()
                     state = COMMAND;
                     //strcpy(line, "Parse Error: UNKNOWN COMMAND");
                     sprintf(line, "Parse Error: UNKNOWN COMMAND");
-                    //length = strlen(line);
+                    /*length = strlen(line);
+                    USB_LoadInEP(1, line, length);*/
                     parsing = 0;
                 }
                 break;
             case ARG1:{
                 int arg1 = atoi(word);
-                if (cmd == 'm' && arg1 != 0 && arg1 < 8){
+                if (cmd == 'm' && arg1 != 0 && arg1 < 9){
                     state = KEYWORD;
                     cmd_motornum = arg1;
                 } else if (cmd == 'd' || cmd == 'r'){
@@ -131,12 +138,14 @@ int main()
                 else {
                     state = COMMAND;
                     strcpy(line, "Parse Error: INVALID ARGUMENT");
-                    //length = strlen(line);
+                    /*length = strlen(line);
+                    USB_LoadInEP(1, line, length);*/
                     parsing = 0;
                 }
                 break;}
             case KEYWORD:{
                 state = ARG2;
+                /*debug*/ for (int i=0;i<strlen(word);i++){LCD_PutChar(word[i]);}
                 if (strcmp(word, "spd") == 0)      cmd_keywrd = 's';
                 else if (strcmp(word, "pos") == 0) cmd_keywrd = 'p';
                 else if (strcmp(word, "stop") == 0) {
@@ -148,7 +157,8 @@ int main()
                     state = COMMAND;
                     //sprintf(line, "Parse Error: UNKNOWN KEYWORD: %s", word);
                     strcpy(line, "Parse Error: UNKNOWN KEYWORD");
-                    //length = strlen(line);
+                    /*length = strlen(line);
+                    USB_LoadInEP(1, line, length);*/
                     parsing = 0;
                 }
                 break;}
@@ -169,12 +179,13 @@ int main()
                     /*THINGS ARE ENDING UP HERE WHEN THEY ARE VALID AND SHOULD BE FINE*/
                     state = COMMAND;
                     strcpy(line, "Parse Error: INVALID VALUE");
-                    //length = strlen(line);
+                    /*length = strlen(line);
+                    USB_LoadInEP(1, line, length);*/
                     parsing = 0;
                 }
                 break;}
             }
-            word = strtok(NULL, " ");
+            word = strtok(NULL, " \n\r");
         }
         
         //once done parsing a line, start processing and forwarding the data
@@ -208,6 +219,7 @@ int main()
                 //length = strlen(line);
                 //Communicate this command byte to the R31JP
                 UART_PutChar(val_byte_out);
+                CyDelay(100);
                 UART_PutChar(inst_byte_out);
                 //in the case of repeats, make the appropriate
                 current_line_num ++;
@@ -231,7 +243,7 @@ int main()
                     receiving = 1;
                 }
                 state = COMMAND;
-                strcpy(line, "Success! This command was evaluated in the PSoC.");
+                strcpy(line, "Success! This command was evaluated in the PSoC.\n\r");
                 break;}
             }
         length = strlen(line);

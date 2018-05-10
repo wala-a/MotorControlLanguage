@@ -32,8 +32,8 @@
 .equ HI, 0FFh
 .equ LO, 00h
 ;SETTINGS:
-.equ POS_CTRL_UNAVAILABLE, 1b
-.equ SPD_CTRL_UNAVAILABLE, 0b
+.equ POS_CTRL_UNAVAILABLE, 0ffh
+.equ SPD_CTRL_UNAVAILABLE, 000b
 
 .org 000h
 ljmp start
@@ -62,7 +62,7 @@ SerialISR:
 	;check the transmit flag
 	;jb ti, return				;if the interrupt was caused by a transmit, just reti
 	lcall getchr
-	;mov p1, a					;debugging
+	mov p1, a					;debugging
 	;lcall sndchr				;debugging
 	; interpret the different sections of a (PSoC communication)
 	lcall parsePSoCInput
@@ -165,17 +165,17 @@ getchr:
 ; and we need to let the PSoC know that something is wrong
 ;===============================================================
 noMotorError:
-	mov a, #02h
-	lcall sndchr
-	ret
-	
-noSpeedCtrlError:
 	mov a, #01h
 	lcall sndchr
 	ret
 	
+noSpeedCtrlError:
+	mov a, #03h
+	lcall sndchr
+	ret
+	
 noPositionCtrlError:
-	mov a, #00h
+	mov a, #02h
 	lcall sndchr
 	ret
 
@@ -198,6 +198,8 @@ parseInst:
 	; acc.4 = 1: speed, 	 0: position
 	; acc.3 = 1: positive, 0: negative
 	; a[2:0] = motor ID number
+			;mov p1, #0aah ;debug
+
 	jb acc.4, setSpeed
 	;TODO: POSITION CONTROL HERE
 	jb POS_CTRL_UNAVAILABLE, noPositionCtrlError
@@ -210,7 +212,7 @@ setSpeed:
 	jb acc.3, setPOSspeed
 	
 setNEGspeed:
-	anl a, #03h		;mask everything but the last 3 bits (they carry the desired motor id)
+	anl a, #07h		;mask everything but the last 3 bits (they carry the desired motor id)
 	jb acc.2, neg8Less
 	jb acc.1, neg3Less
 	negOneLess:
@@ -225,7 +227,8 @@ setNEGspeed:
 		;max 4 motors (at least for now)
 		ljmp negMOTOR4		; #100b	= MOTOR#
 setPOSspeed:
-	anl a, #03h		;mask everything but the last 3 bits (they carry the desired motor id)
+	anl a, #07h		;mask everything but the last 3 bits (they carry the desired motor id)
+	;mov p1, a		;debug
 	jb acc.2, pos8Less
 	jb acc.1, pos3Less
 	posOneLess:
@@ -302,7 +305,10 @@ writeMotorDataToPorts:
 	mov dptr, #PORT_B_ADDR
 	mov a, PORT_B_WRITE_DATA
 	anl a, STATUS
+	anl a, STATUS
 	movx @DPTR, a
 	;clr p1.6				;debugging
+	mov a, #00h
+	lcall sndchr			;communicate back to the PSoC That everything was received
 	ret
 	

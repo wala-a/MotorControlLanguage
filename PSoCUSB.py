@@ -43,8 +43,8 @@ while (True):
 	print(''.join([chr(l) for l in epIn.read(100)])) #receive the echo
 
 	try:
-		print("trying to receive more data")
-		print(''.join([chr(l) for l in epIn.read(100, timeout=10000)])) #receive the echo
+		#print("trying to receive more data")
+		print(''.join([chr(l) for l in epIn.read(100, timeout=1000)])) #receive the echo
 	except usb.core.USBError as e:
-		print("failed to receive more data")
+		#print("failed to receive more data")
 		pass

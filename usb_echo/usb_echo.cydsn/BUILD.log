@@ -1,4 +1,4 @@
---------------- Build Started: 05/10/2018 18:06:10 Project: usb_echo, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Build Started: 05/11/2018 13:27:44 Project: usb_echo, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 The code generation step is up to date.
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/main.lst -g -D DEBUG -Wall -ffunction-sections -ffat-lto-objects -Og -c main.c -o .\CortexM3\ARM_GCC_541\Debug\main.o
 main.c: In function 'RX_INT':
@@ -44,7 +44,7 @@ main.c:64:24: warning: pointer targets in passing argument 1 of 'sprintf' differ
      case 0b00: sprintf(errorMsg, "Success! data was delivered to the R31JP, %d", RxData);
                         ^
 main.c:64:24: note: expected 'char *' but argument is of type 'uint8 * {aka unsigned char *}'
-main.c:67:31: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+main.c:66:31: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
      uint16 errLength = strlen(errorMsg);
                                ^
 In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
@@ -56,7 +56,7 @@ c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.
  size_t  _EXFUN(strlen,(const char *));
          ^
 main.c: In function 'main':
-main.c:103:35: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
+main.c:102:35: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
              if (receiving) strcpy(lines[current_line_num], buffer);
                                    ^
 In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
@@ -67,7 +67,7 @@ In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creat
 c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
  char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
         ^
-main.c:103:60: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
+main.c:102:60: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
              if (receiving) strcpy(lines[current_line_num], buffer);
                                                             ^
 In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
@@ -78,7 +78,7 @@ In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creat
 c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'const char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
  char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
         ^
-main.c:105:20: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
+main.c:106:20: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
              strcpy(buffer, lines[current_line_num]);
                     ^
 In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
@@ -89,7 +89,7 @@ In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creat
 c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
  char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
         ^
-main.c:105:28: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
+main.c:106:28: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
              strcpy(buffer, lines[current_line_num]);
                             ^
 In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
@@ -100,7 +100,7 @@ In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creat
 c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'const char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
  char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
         ^
-main.c:112:23: warning: pointer targets in passing argument 1 of 'strtok' differ in signedness [-Wpointer-sign]
+main.c:113:23: warning: pointer targets in passing argument 1 of 'strtok' differ in signedness [-Wpointer-sign]
          word = strtok(buffer, " \n\r");
                        ^
 In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
@@ -111,15 +111,15 @@ In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creat
 c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:42:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
  char  *_EXFUN(strtok,(char *__restrict, const char *__restrict));
         ^
-main.c:123:21: warning: incompatible implicit declaration of built-in function 'sprintf'
+main.c:124:21: warning: incompatible implicit declaration of built-in function 'sprintf'
                      sprintf(line, "Parse Error: UNKNOWN COMMAND");
                      ^
-main.c:123:21: note: include '<stdio.h>' or provide a declaration of 'sprintf'
-main.c:123:29: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+main.c:124:21: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+main.c:124:29: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
                      sprintf(line, "Parse Error: UNKNOWN COMMAND");
                              ^
-main.c:123:29: note: expected 'char *' but argument is of type 'uint8 * {aka unsigned char *}'
-main.c:140:28: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
+main.c:124:29: note: expected 'char *' but argument is of type 'uint8 * {aka unsigned char *}'
+main.c:142:28: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
                      strcpy(line, "Parse Error: INVALID ARGUMENT");
                             ^
 In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
@@ -130,51 +130,43 @@ In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creat
 c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
  char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
         ^
-main.c:159:28: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
-                     strcpy(line, "Parse Error: UNKNOWN KEYWORD");
-                            ^
-In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
-                 from Generated_Source\PSoC5/CyLib.h:22,
-                 from Generated_Source\PSoC5/USB.h:22,
-                 from Generated_Source\PSoC5/project.h:22,
-                 from main.c:12:
-c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
- char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
-        ^
-main.c:181:28: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
-                     strcpy(line, "Parse Error: INVALID VALUE");
-                            ^
-In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
-                 from Generated_Source\PSoC5/CyLib.h:22,
-                 from Generated_Source\PSoC5/USB.h:22,
-                 from Generated_Source\PSoC5/project.h:22,
-                 from main.c:12:
-c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
- char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
-        ^
-main.c:218:24: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
-                 strcpy(line, "Success! Data being sent right over.");
-                        ^
-In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
-                 from Generated_Source\PSoC5/CyLib.h:22,
-                 from Generated_Source\PSoC5/USB.h:22,
-                 from Generated_Source\PSoC5/project.h:22,
-                 from main.c:12:
-c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
- char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
-        ^
-main.c:246:24: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
-                 strcpy(line, "Success! This command was evaluated in the PSoC.\n\r");
-                        ^
-In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
-                 from Generated_Source\PSoC5/CyLib.h:22,
-                 from Generated_Source\PSoC5/USB.h:22,
-                 from Generated_Source\PSoC5/project.h:22,
-                 from main.c:12:
-c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:30:8: note: expected 'char * restrict' but argument is of type 'uint8 * {aka unsigned char *}'
- char  *_EXFUN(strcpy,(char *__restrict, const char *__restrict));
-        ^
-main.c:249:25: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+main.c:161:21: warning: incompatible implicit declaration of built-in function 'sprintf'
+                     sprintf(line, "Parse Error: UNKNOWN KEYWORD: %s", word);
+                     ^
+main.c:161:21: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+main.c:161:29: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+                     sprintf(line, "Parse Error: UNKNOWN KEYWORD: %s", word);
+                             ^
+main.c:161:29: note: expected 'char *' but argument is of type 'uint8 * {aka unsigned char *}'
+main.c:184:21: warning: incompatible implicit declaration of built-in function 'sprintf'
+                     sprintf(line, "Parse Error: INVALID VALUE: %d", number);
+                     ^
+main.c:184:21: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+main.c:184:29: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+                     sprintf(line, "Parse Error: INVALID VALUE: %d", number);
+                             ^
+main.c:184:29: note: expected 'char *' but argument is of type 'uint8 * {aka unsigned char *}'
+main.c:221:17: warning: incompatible implicit declaration of built-in function 'sprintf'
+                 sprintf(line, "Success! Data being sent right over. line=%d numlines=%d", current_line_num, num_lines);
+                 ^
+main.c:221:17: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+main.c:221:25: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+                 sprintf(line, "Success! Data being sent right over. line=%d numlines=%d", current_line_num, num_lines);
+                         ^
+main.c:221:25: note: expected 'char *' but argument is of type 'uint8 * {aka unsigned char *}'
+main.c:235:42: warning: character constant too long for its type
+                     /*debug*/LCD_PutChar('setup');
+                                          ^
+main.c:235:42: warning: large integer implicitly truncated to unsigned type [-Woverflow]
+main.c:254:17: warning: incompatible implicit declaration of built-in function 'sprintf'
+                 sprintf(line, "Success! This command: %c, was evaluated in the PSoC.\n\r", cmd);
+                 ^
+main.c:254:17: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+main.c:254:25: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+                 sprintf(line, "Success! This command: %c, was evaluated in the PSoC.\n\r", cmd);
+                         ^
+main.c:254:25: note: expected 'char *' but argument is of type 'uint8 * {aka unsigned char *}'
+main.c:257:25: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
          length = strlen(line);
                          ^
 In file included from c:\program files (x86)\cypress\psoc creator\4.2\psoc creator\import\gnu\arm\5.4.1\arm-none-eabi\include\string.h:10:0,
@@ -193,6 +185,6 @@ No ELF section .cychecksum found, creating one
 Application checksum calculated and stored in ELF section .cychecksum
 Checksum calculated and stored in ELF section .cymeta
 cyelftool.exe -S C:\Users\Walaa\Downloads\usb_echo\usb_echo\usb_echo.cydsn\CortexM3\ARM_GCC_541\Debug\usb_echo.elf
-Flash used: 11678 of 262144 bytes (4.5 %).
+Flash used: 11662 of 262144 bytes (4.4 %).
 SRAM used: 8385 of 65536 bytes (12.8 %). Stack: 2048 bytes. Heap: 128 bytes.
---------------- Build Succeeded: 05/10/2018 18:06:11 ---------------
+--------------- Build Succeeded: 05/11/2018 13:27:45 ---------------

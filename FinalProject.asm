@@ -7,14 +7,14 @@
 ; in the format: MOTOR_DIRECTION_8255PORT
 .equ MOTOR0_POS_C, 	 00000100b
 .equ MOTOR0_NEG_C, 	 00001000b
-.equ MOTOR1_POS_B, 00000001b
-.equ MOTOR1_NEG_B, 10000000b
+.equ MOTOR1_POS_B, 	 00000001b
+.equ MOTOR1_NEG_B, 	 10000000b
 .equ MOTOR2_POS_B, 	 01000000b
 .equ MOTOR2_NEG_B, 	 00100000b
 .equ MOTOR3_POS_B, 	 00001000b
 .equ MOTOR3_NEG_B, 	 00010000b
-.equ MOTOR4_POS_B,  00000010b
-.equ MOTOR4_NEG_B,  00000100b
+.equ MOTOR4_POS_B,   00000010b
+.equ MOTOR4_NEG_B,   00000100b
 
 ;registers to hold the values to write to each port of 8255
 .equ PORT_B_WRITE_DATA, 03h
@@ -41,43 +41,62 @@ ljmp start
 ; timer interrupts to handle the PWM
 .org 00Bh
 T0ISR:
+;cpl p3.4
 	; check the STATUS register (R7) and jmp accordingly
-	cjne R7, #LO, lowct
+	cjne R7, #HI, lowct
 	;load the reload value for the next timer expiration
 	;if cpl(A) is high, the next round will be low, and vice versa
 	highct:	
 		mov TH0, HIGH_COUNT		; set the count to the high value
-		mov STATUS, #HI			; set the status to HI
-		;setb p3.5
+		mov STATUS, #LO;HI			; set the status to HI
+		;setb p3.5				;debugging
+		;ljmp write
 		reti
 	lowct:
 		mov TH0, LOW_COUNT		; set the count to the low value
-		mov STATUS, #LO			; set the status to LO
-		;clr p3.5
+		mov STATUS, #HI;LO			; set the status to LOmhgcdghjfy
+		;clr p3.5				;debugging
 		reti
+;write:
+;	lcall writeMotorDataToPorts 
+;	reti
 
 ; Serial interrupt to handle incoming data from PSoC
 .org 0023h
 SerialISR:
 	;check the transmit flag
-	;jb ti, return				;if the interrupt was caused by a transmit, just reti
-	lcall getchr
-	mov p1, a					;debugging
+	jb ti, return				;if the interrupt was caused by a transmit, just reti
+	mov  a,  sbuf ;lcall getchr
+	;mov p1, a					;debugging
 	;lcall sndchr				;debugging
 	; interpret the different sections of a (PSoC communication)
 	lcall parsePSoCInput
-	return:
+	clr ri  ;NEW debug: ri should be cleared so more receives can happen
+	return:	
+		clr ti	;NEW debug: clr ti so transmit can happen
 		reti
-
 
 start:
 	lcall initSerial
 	lcall setup8255
-	mov RHIGH, #50d			;initialize pwm to 50% duty cycle
+	mov RHIGH, #75d			;initialize pwm to 50% duty cycle
 	lcall pwmSetup
 	lcall timersetup
 
-	loop: ljmp loop
+	loop: 	;mov p1, STATUS	;debugging
+		mov p1, STATUS	;debugging
+		
+		mov dptr, #PORT_C_ADDR	
+		mov a, PORT_C_WRITE_DATA
+		anl a, STATUS
+		movx @dptr, a
+
+		mov dptr, #PORT_B_ADDR
+		mov a, PORT_B_WRITE_DATA
+		anl a, STATUS
+		movx @DPTR, a
+		
+		ljmp loop
 	
 
 ;setup the timer to produce PWM via interrupts
@@ -92,7 +111,7 @@ setup8255:
 	mov dptr, #CTRL_WRD_ADDR
 	mov a, #90h
 	movx @dptr, a			; init the control word of the 8255 so that all ports
-							; are output ports
+							; are output ports except port A which is input
 	mov dptr, #PORT_C_ADDR	; move the address in dptr to output data to port C
 	mov a, #00h
 	movx @dptr, a			; zero out port c
@@ -111,17 +130,23 @@ pwmSetup:
 	subb a, RHIGH		;timer counts UP from the value to 255	
 	mov HIGH_COUNT, a
 	
+	clr c 	;debug
+	
 	mov a, #100d
 	subb a, RHIGH		;subtract rhigh from 100 in order to get the low count
 	mov RLOW, a			; since RLOW + RHIGH = 100 always
+	
+	clr c ;debug
 	
 	mov a, #255d		;subtract the count value from 255 because the 8051
 	subb a, RLOW		;timer counts UP from the value to 255	
 	mov LOW_COUNT, a
 	
+	clr c ;debug
+	
 	;setup the square wave status (init at low)
 	mov TH0, LOW_COUNT		; initialize the value of timer 0 with low count
-	mov STATUS, #LO			; initialize the status to LO
+	mov STATUS, #LO			; initialize the status to HI
 	ret
 	
 ;=================================================================
@@ -144,10 +169,10 @@ initSerial:
 ; serial port.
 ;===============================================================
 sndchr:
-   clr  scon.1            ; clear the tx  buffer full flag.
+   ;clr  ti            ;NEW  debug: should be unnecessary: clear the tx  buffer full flag.
    mov  sbuf,a            ; put chr in sbuf
 txloop:
-   jnb  scon.1, txloop    ; wait till chr is sent
+   ;jnb  ti, txloop    ; NEW debug: commented out wait till chr is sent
    ret
 ;===============================================================
 ; subroutine getchr
@@ -155,9 +180,9 @@ txloop:
 ; in the accumulator.
 ;===============================================================
 getchr:
-   jnb  ri, getchr        ; wait till character received
+   ;jnb  ri, getchr        ; wait till character received
    mov  a,  sbuf          ; get character
-   clr  ri                ; clear serial status bit
+   ;clr ri ;debuggggg
    ret
    
 ;===============================================================
@@ -166,17 +191,17 @@ getchr:
 ;===============================================================
 noMotorError:
 	mov a, #01h
-	lcall sndchr
+	mov  a,  sbuf ;lcall sndchr
 	ret
 	
 noSpeedCtrlError:
 	mov a, #03h
-	lcall sndchr
+	mov  a,  sbuf ;lcall sndchr
 	ret
 	
 noPositionCtrlError:
 	mov a, #02h
-	lcall sndchr
+	mov  a,  sbuf ;lcall sndchr
 	ret
 
 ;===============================================================
@@ -186,15 +211,22 @@ noPositionCtrlError:
 ; order bit (1: inst, 0: val)
 ;===============================================================
 parsePSoCInput:
+
 	jb acc.7, parseInst		;if acc.7 = 1, then we need to parse the instruction
 	;if acc.7 = 0, then we have the value for speed/position, we can save it
+
 	mov RHIGH, a			; a is restricted to between 0 and 100 (limits of RHIGH)
 	lcall pwmSetup			;call this subroutine to update the pwm appropriately
+	
+	mov p1, RLOW
+	
 	;clr p1.1				;debugging
 	;mov p1, a				;debugging
 	ret
 	
 parseInst:
+	clr ri		;NEW debug??? in order to be able to tramsmit stuff
+
 	; acc.4 = 1: speed, 	 0: position
 	; acc.3 = 1: positive, 0: negative
 	; a[2:0] = motor ID number
@@ -202,13 +234,13 @@ parseInst:
 
 	jb acc.4, setSpeed
 	;TODO: POSITION CONTROL HERE
-	jb POS_CTRL_UNAVAILABLE, noPositionCtrlError
+	jb POS_CTRL_UNAVAILABLE, noPositionCtrlError	;DEBUG::: checking a location not the actual literal bit defineed above??
 	;
 	;
 	ret
 	
 setSpeed:
-	jb SPD_CTRL_UNAVAILABLE, noSpeedCtrlError
+	jb SPD_CTRL_UNAVAILABLE, noSpeedCtrlError;DEBUG::: checking a location not the actual literal bit defineed above??
 	jb acc.3, setPOSspeed
 	
 setNEGspeed:
@@ -297,18 +329,17 @@ negMOTOR0:
 writeMotorDataToPorts:
 	; activate the correct motor (bit) in the correct port
 	; and deactivate all other motors in the other port
-	cpl p3.5
 	mov dptr, #PORT_C_ADDR	
 	mov a, PORT_C_WRITE_DATA
-	anl a, STATUS
+	anl a, R7;STATUS
+;	mov p1, STATUS	;debugging
 	movx @dptr, a
 	mov dptr, #PORT_B_ADDR
 	mov a, PORT_B_WRITE_DATA
-	anl a, STATUS
-	anl a, STATUS
+	anl a, R7;STATUS
 	movx @DPTR, a
-	;clr p1.6				;debugging
 	mov a, #00h
-	lcall sndchr			;communicate back to the PSoC That everything was received
+	mov a, RHIGH	;debug
+	mov  a,  sbuf ;lcall sndchr			;communicate back to the PSoC That everything was received
 	ret
 	

@@ -1,6 +1,5 @@
 import usb.core
 import usb.util
-import usb.core
 import array
 
 # search for our device by product and vendor ID
@@ -36,15 +35,19 @@ epIn = usb.util.find_descriptor(
 assert epOut is not None
 assert epIn is not None
 
+#TODO:: maybe do the receiving and sending in two seperate threads
 while (True):
 	t = input()	+ "\r\n"									  #get the user input
 	i = len(t)
 	epOut.write(t) 
 	print(''.join([chr(l) for l in epIn.read(100)])) #receive the echo
 
-	try:
-		#print("trying to receive more data")
-		print(''.join([chr(l) for l in epIn.read(100, timeout=1000)])) #receive the echo
-	except usb.core.USBError as e:
-		#print("failed to receive more data")
-		pass
+	#This is the maximum size of a repeat
+	for i in range(20):
+		try:
+			#print("trying to receive more data")
+			print(''.join([chr(l) for l in epIn.read(100, timeout=500)])) #receive the echo
+		except usb.core.USBError as e:
+			#print("failed to receive more data")
+			#pass
+			break

@@ -61,7 +61,9 @@ CY_ISR(RX_INT){
         break;
     case 0b01: strcpy(errorMsg, "NO SUCH MOTOR ERROR\n\r");
         break;
-    case 0b00: sprintf(errorMsg, "Success! data was delivered to the R31JP, %d", RxData);
+    case 0b00: sprintf(errorMsg, "Success! data was delivered to the R31JP");
+        break;
+    default: sprintf(errorMsg, "received from the R31JP:%d", RxData);
     }
     uint16 errLength = strlen(errorMsg);
     USB_LoadInEP(1, errorMsg, errLength); 
@@ -100,9 +102,9 @@ int main()
             while(USB_GetEPState(1) != USB_IN_BUFFER_EMPTY);    // Wait until our IN EP is empty
             //if we are receiving the lines to be repeated, save the line
             if (receiving) strcpy(lines[current_line_num], buffer);
-            /*debug*/LCD_PutChar('E');
+            //*debug*/LCD_PutChar('E');
         } else {
-            /*debug*/LCD_PutChar('R');
+            //*debug*/LCD_PutChar('R');
             strcpy(buffer, lines[current_line_num]);
         }
         LCD_ClearDisplay();
@@ -152,6 +154,7 @@ int main()
                 else if (strcmp(word, "pos") == 0) cmd_keywrd = 'p';
                 else if (strcmp(word, "stop") == 0) {
                     cmd_keywrd = 's';
+                    cmd_sign = '+';
                     cmd_val = 0;
                     state = SND8051;
                 }
@@ -166,7 +169,7 @@ int main()
                 break;}
             case ARG2:{
                 /*int*/ number = abs(atoi(word));
-                /*debug*/ for (int i=0;i<strlen(word);i++){LCD_PutChar(word[i]);}
+                //*debug*/ for (int i=0;i<strlen(word);i++){LCD_PutChar(word[i]);}
                 //check if the value is a number and if it is within bounds
                 if (cmd == 'r' && number != 0 && word[0] != '-'){
                     state = EVAL;
@@ -218,7 +221,7 @@ int main()
                     val_byte_out += (value >> i) & 1;
                 }
 
-                sprintf(line, "Success! Data being sent right over. line=%d numlines=%d", current_line_num, num_lines);
+                sprintf(line, "Success! Data being sent right over.");// line=%d numlines=%d", current_line_num, num_lines);
                 //length = strlen(line);
                 //Communicate this command byte to the R31JP
                 UART_PutChar(val_byte_out);
